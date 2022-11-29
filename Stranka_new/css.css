@@ -62,7 +62,15 @@
   position: fixed;
 }
 .nav-bar a{
-  margin: 55px;
+  display: flex;
+  margin-top: 75px;
+  text-align: center;
+  height: 100px;
+  align-items:center;
+  justify-content:center;
+  text-decoration: none;
+  color: black;
+  font-size: 30px;
 }
 .odkaz:hover{
   background-color: beige;
@@ -73,12 +81,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 55px;
   height: 100%;
   align-items: stretch;
   margin-top: 50px;
 }
 .main-content{
+  display: flex;
   float: left;
-  margin-left: 50%;
 }
