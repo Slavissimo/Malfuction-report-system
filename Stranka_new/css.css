@@ -34,8 +34,8 @@
 .h1_welcoming{
   color: #00FF00;
   text-align: center;
-  width: 100%;
   font-size: 25px;
+  height: 20%;
 }
 #login{
   display: flex;
@@ -87,5 +87,5 @@
 }
 .main-content{
   display: flex;
-  float: left;
+  margin-left: 25%;
 }
