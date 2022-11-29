@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: 'Titillium Web', sans-serif;
+  }
+  .logo{
+    position: absolute;
+    bottom: 0;
+    vertical-align: left;
+    width: 50px;
+    height: auto;
+}
+#logo_skoly{
+  margin-left: 1%;
+  width: 75px;
+}
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #696969;
+  }
+.copyrightankle {
+  color: white;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+}
+.copyrightankle p{
+  text-align: center;
+}
+.h1_welcoming{
+  color: #00FF00;
+  text-align: center;
+  width: 100%;
+  font-size: 25px;
+}
+#login{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 25%;
+  height: 100%;
+  right: 0;
+  justify-content: center;
+  position: fixed;
+  align-items: stretch;
+  gap: 2rem;
+}
+.text{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.nav-bar{
+  width: 25%;
+  height: 100%;
+  display: flex;
+  background-color: aliceblue;
+  position: fixed;
+}
+.nav-bar a{
+  margin: 55px;
+}
+.odkaz:hover{
+  background-color: beige;
+  border: 2px solid gray;
+  width: 100%;
+}
+.odkazy{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 55px;
+  height: 100%;
+  align-items: stretch;
+  margin-top: 50px;
+}
+.main-content{
+  float: left;
+  margin-left: 50%;
+}
