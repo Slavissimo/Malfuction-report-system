@@ -80,6 +80,12 @@
   color: black;
   font-size: 30px;
 }
+.odkaz i{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 1rem;
+}
 .odkaz:hover{
   background-color: beige;
   border: 2px solid gray;
