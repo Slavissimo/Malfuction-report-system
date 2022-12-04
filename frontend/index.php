@@ -1,3 +1,6 @@
+<?php
+require '../config/config.php';
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,9 +16,9 @@
   <body class="kontainer">
     <div class="nav-bar">
       <div class="odkazy">
-        <a class="odkaz" href="index.html"><i class="fa-solid fa-house"></i>Domov</a>
-        <a class="odkaz" href="reports.html"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
-        <a class="odkaz" href="reportform.html"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
+        <a class="odkaz" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
+        <a class="odkaz" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
+        <a class="odkaz" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
       </div>
     </div>
     <div class="main-content">
