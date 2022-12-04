@@ -21,9 +21,6 @@
           <div class="text">
             <input class="form-control" type="text" required>
             <span></span>
-            <?php if (isset($_GET['error'])) { ?>
-            <p class="error"><?php echo $_GET['error']; ?></p>
-            <?php } ?>
             <label>Prihlasovacie meno</label>
         </div>
         <div class="text">
