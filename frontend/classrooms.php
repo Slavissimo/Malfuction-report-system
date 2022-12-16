@@ -1,15 +1,7 @@
 <?php
 
-$host = "localhost"; 
-$user = "root"; 
-$password = ""; 
-$db = "ticket_system"; 
-
-$conn = new mysqli("localhost", "root", "", "ticket_system");
-
-if($conn ->connect_error) {
-   die("Connection error, try again!");
-}?>
+require '../config/config.php';
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,7 +17,6 @@ if($conn ->connect_error) {
   <body class="kontainer">
     <div class="nav-bar">
       <div class="odkazy">
-        <a class="odkaz" href="index.php"><i class="fa-solid fa-house"></i>Domov</a>
         <a class="odkaz" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="odkaz" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
       </div>

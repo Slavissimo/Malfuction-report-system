@@ -17,7 +17,6 @@ require '../config/config.php';
   <body class="kontainer">
     <div class="nav-bar">
       <div class="odkazy">
-        <a class="odkaz" href="index.php"><i class="fa-solid fa-house"></i>Domov</a>
         <a class="odkaz" href="classrooms.php"><i class="fa-solid fa-people-group"></i></i> Moje učebne</a>
         <a class="odkaz" href="reportform.php"><i class="fa-solid fa-pen"></i> Nové nahlásenie</a>
       </div>
@@ -40,8 +39,9 @@ require '../config/config.php';
             </thead>
             <tbody>
                 <?php 
-                    $query = "SELECT reports.id, classrooms.number, reports.message FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id";
+                    $query = "SELECT classrooms.number, reports.message FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id";
                     $result = mysqli_query($conn, $query);
+                    $cislo = 1;
 
                     if(mysqli_num_rows($result) > 0)
                     {
@@ -49,7 +49,7 @@ require '../config/config.php';
                         {
                             ?>
                             <tr>
-                                <td><?= $data['id']; ?></td>
+                                <td><?= $cislo; ?></td>
                                 <td><?= $data['number']; ?></td>
                                 <td><?= $data['message']; ?></td>
                             </tr>
@@ -60,6 +60,7 @@ require '../config/config.php';
                     {
                         echo '<p class="alert alert-danger mt-1"> There are no users in your database <p>';
                     }
+                    $cislo +=1;
                 ?>
             </tbody>
         </table>

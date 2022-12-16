@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once("../config/config.php");
+require_once("../backend/loginconfirm.php");
+include('../frontend/components/alertDanger.php');
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,19 +23,19 @@
       </div>
       <div id="login">
         <h1 class="text-center text">Login</h1>
-        <form action="login.php" method="POST">
+        <form method="POST" action="../backend/loginconfirm.php">
           <div class="text">
-            <input class="form-control" type="text" required>
+            <input class="form-control" type="text" name="username" required>
             <span></span>
             <label>Prihlasovacie meno</label>
         </div>
         <div class="text">
-            <input class="form-control" type="password" required>
+            <input class="form-control" type="password" name="password" required>
             <span></span>
             <label>Heslo</label>
         </div>
         <div>
-        <input class="btn btn-primary" type="submit" value="Login">
+        <button class="btn btn-primary" name="login"> LOGIN </button>
         <p></p>
         </div>
         </form>
