@@ -10,14 +10,15 @@ require '../config/config.php';
         $result = mysqli_query($conn, $query);
 
         if(mysqli_num_rows($result) > 0) { 
-            foreach($result as $var) {
-                $dbPass = $var['password_hash'];
+            $userData = mysqli_fetch_array($result);
+
+            $dbPass = $userData['password_hash'];
                 if (password_verify($password, $dbPass)) {
                     header("Location: ../frontend/classrooms.php");
                 } else {
                     echo "zle heslo";
                 }
-            } 
+
         } else {
             echo "Zly uzivatel";
         }
