@@ -5,8 +5,7 @@ require '../config/config.php';
 <html>
   <head>
         <link rel="stylesheet" href="css.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-        <script src="https://kit.fontawesome.com/7a7a8f8bce.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">        <script src="https://kit.fontawesome.com/7a7a8f8bce.js" crossorigin="anonymous"></script>
         <link rel="icon" href="https://cdn.discordapp.com/attachments/670709218340241408/969608874011262976/logo_spse.png" type="image/icon type">
         <meta charset="UTF-8">
         <meta name="author" content="Slavomír Salončuk">
@@ -14,27 +13,25 @@ require '../config/config.php';
         <meta name="keywords" content="SPŠE, ticket systém">
         <title>Ticketový systém</title>
   </head>
-  <body class="kontainer">
-    <div class="nav-bar">
-      <div class="odkazy">
-        <a class="odkaz" href="classrooms.php"><i class="fa-solid fa-people-group"></i></i> Moje učebne</a>
-        <a class="odkaz" href="reportform.php"><i class="fa-solid fa-pen"></i> Nové nahlásenie</a>
-      </div>
-    </div>
-    <div class="vypis mt-4">
+  <body class="container-fluid">
+  <nav class="nav fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
+        <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
+   </nav>
+   <div class="mt-4">
 
         <div class="card shadow p-3 mb-5 bg-body rounded">
-            <div class="card-body">
+            <div>
                 <h2 class="text-center">Moje nahlásenia</h2>
             </div>
         </div>
-
-        <table class="table table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
-            <thead>
+        <div class="table-responsive">
+        <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
+            <thead class="thead-dark">
                 <tr>
-                    <th>Číslo nahlásenia</th>
-                    <th>Číslo miestnosti</th>
-                    <th>Správa</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Miestnosť</th>
+                    <th scope="col">Správa</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,6 +61,7 @@ require '../config/config.php';
                 ?>
             </tbody>
         </table>
+        </div>
 
     </div>
   </body>

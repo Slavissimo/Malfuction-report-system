@@ -16,11 +16,13 @@ require '../config/config.php';
                 if (password_verify($password, $dbPass)) {
                     header("Location: ../frontend/classrooms.php");
                 } else {
-                    echo "zle heslo";
+                    $_SESSION['message'] = "Wrong password";
+                    header("Location: ../frontend/login.php");
                 }
 
         } else {
-            echo "Zly uzivatel";
+            $_SESSION['message'] = "Wrong password";
+            header("Location: ../frontend/login.php");
         }
     }
 ?>
