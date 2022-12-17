@@ -18,7 +18,7 @@ require '../config/config.php';
   <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
         <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
-        <button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button>
+        <button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i><a href="../backend/logout.php">Logout</a></button>
    </nav>
    <div class="mt-4">
 

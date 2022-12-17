@@ -1,4 +1,5 @@
 <?php
+require '../backend/loginconfirm.php';
 require '../config/config.php';
 ?>
 <!DOCTYPE html>
@@ -17,10 +18,50 @@ require '../config/config.php';
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
-        <button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button>
+        <button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i><a href="../backend/logout.php">Logout</a></button>
    </nav>
-    <div class="main-content">
-        <h1>ajkhasdjkldas</h1>
+   <div class="card shadow p-3 mb-5 bg-body rounded">
+            <div class="mt-5">
+                <h2 class="text-center">Moje učebne</h2>
+            </div>
+        </div>
+        <div class="table-responsive">
+        <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Miestnosť</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                    $uid = $_SESSION['userid'];
+                    $query = "SELECT classrooms.number FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id   WHERE user_id = $uid";
+                    $result = mysqli_query($conn, $query);
+                    $cislo = 1;
+
+                    if(mysqli_num_rows($result) > 0)
+                    {
+                        foreach($result as $data)
+                        {
+                            ?>
+                            <tr>
+                                <td><?= $cislo; ?></td>
+                                <td><?= $data['number']; ?></td>
+                            </tr>
+                            <?php
+                            $cislo = $cislo +1;
+                        }
+                    }
+                    else
+                    {
+                        echo '<p class="alert alert-danger mt-1"> There are no reports in your database <p>';
+                    }
+                ?>
+            </tbody>
+        </table>
+        </div>
+
     </div>
   </body>
 </html>
