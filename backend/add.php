@@ -3,24 +3,27 @@
 session_start();
 require '../config/config.php';
 
-if(isset($_POST['add'])) {
-    $fname = mysqli_real_escape_string($conn, $_POST['fname']);
-    $lname = mysqli_real_escape_string($conn, $_POST['lname']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $age = mysqli_real_escape_string($conn, $_POST['age']);
-
-    $query = "INSERT INTO users ( fname, lname, email, age) VALUES ('$fname', '$lname', '$email', '$age')";
+if(isset($_POST['send'])) {
+    $classrooms = $_POST['inputClassroom'];
+    $pcnumber = $_POST['ComputerNumber'];
+    $description = $_POST['Description'];
+    $classrooms = (int)$classrooms;
+    $cislo = "SELECT classrooms.id FROM classrooms WHERE number = $classrooms";
+    $sql = mysqli_query($conn, $cislo);
+    $fetch = mysqli_fetch_array($sql, MYSQLI_ASSOC);
+    $id = $fetch['id'];
+    $query = "INSERT INTO reports (classroom_id, pcnumber, message) VALUES ('$id', '$pcnumber', '$description')";
     $result = mysqli_query($conn, $query);
 
 
 
     if ($result) {
-        $_SESSION['message'] = "You have created a user";
-        header("Location: ../pages/create.php");
+        $_SESSION['message'] = "Report has been sent";
+        header("Location: ../frontend/reports.php");
         exit(0);
     } else {
-        $_SESSION['message'] = "User was not created! Try again";
-        header("Location: ../pages/create.php");
+        $_SESSION['message'] = "Report was not send! Try again";
+        header("Location: ../frontend/reports.php");
         exit(0);
     }
 }

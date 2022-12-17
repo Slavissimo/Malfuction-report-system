@@ -1,5 +1,5 @@
 <?php
-
+require '../backend/add.php';
 require '../config/config.php';
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,42 @@ require '../config/config.php';
         <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
    </nav>
     <div class="mt-4">
-        <h1>ajkhasdjkldas</h1>
+    <div class="card shadow p-3 mb-5">
+            <div>
+                <h2 class="text-center">Nové nahlásenie</h2>
+            </div>
+        </div>
+  <form method="POST" action="../backend/add.php">
+  <div class="form-group">
+  <label name="inputClassroom">Učebňa</label>
+      <select name="inputClassroom" class="form-control">
+    <?php
+    $query = "SELECT number FROM classrooms";
+    $result = mysqli_query($conn, $query);
+    if(mysqli_num_rows($result) > 0){
+      foreach($result as $data){
+        ?>
+        <option><?= $data['number']; ?></option>
+        <?php
+      }
+
+    }
+    {
+      echo '<p class="alert alert-danger mt-1"> There are no classrooms in your database <p>';
+    }
+      ?>
+      </select>
+    </div>
+  <div class="form-group">
+    <label name="ComputerNumber">Číslo počítača</label>
+    <input class="form-control" name="ComputerNumber" placeholder="PC-13">
+  </div>
+  <div class="form-group">
+    <label name="Description">Popis problému</label>
+    <textarea class="form-control" name="Description" rows="3"></textarea>
+  </div>
+  <button class="btn btn-block btn-primary" name="send">Send</button>
+</form>
     </div>
   </body>
 </html>

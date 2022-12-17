@@ -31,12 +31,13 @@ require '../config/config.php';
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Miestnosť</th>
+                    <th scope="col">Č.PC</th>
                     <th scope="col">Správa</th>
                 </tr>
             </thead>
             <tbody>
                 <?php 
-                    $query = "SELECT classrooms.number, reports.message FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id";
+                    $query = "SELECT classrooms.number, reports.pcnumber, reports.message FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id";
                     $result = mysqli_query($conn, $query);
                     $cislo = 1;
 
@@ -48,16 +49,17 @@ require '../config/config.php';
                             <tr>
                                 <td><?= $cislo; ?></td>
                                 <td><?= $data['number']; ?></td>
+                                <td><?= $data['pcnumber']; ?></td>
                                 <td><?= $data['message']; ?></td>
                             </tr>
                             <?php
+                            $cislo = $cislo +1;
                         }
                     }
                     else
                     {
-                        echo '<p class="alert alert-danger mt-1"> There are no users in your database <p>';
+                        echo '<p class="alert alert-danger mt-1"> There are no reports in your database <p>';
                     }
-                    $cislo +=1;
                 ?>
             </tbody>
         </table>

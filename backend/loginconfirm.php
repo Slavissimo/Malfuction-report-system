@@ -21,7 +21,7 @@ require '../config/config.php';
                 }
 
         } else {
-            $_SESSION['message'] = "Wrong password";
+            $_SESSION['message'] = "Wrong Username";
             header("Location: ../frontend/login.php");
         }
     }
