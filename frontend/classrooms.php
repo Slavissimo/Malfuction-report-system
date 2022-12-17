@@ -1,5 +1,4 @@
 <?php
-
 require '../config/config.php';
 ?>
 <!DOCTYPE html>
@@ -15,9 +14,10 @@ require '../config/config.php';
         <title>Ticketový systém</title>
   </head>
   <body class="container-fluid">
-    <nav class="nav fixed-top navbar-dark bg-dark">
+    <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
+        <button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button>
    </nav>
     <div class="main-content">
         <h1>ajkhasdjkldas</h1>

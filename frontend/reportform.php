@@ -15,9 +15,10 @@ require '../config/config.php';
         <title>Ticketový systém</title>
   </head>
   <body class="container-fluid">
-    <nav class="nav fixed-top navbar-dark bg-dark">
+    <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
+        <button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i><a href="../backend/logout.php">Logout</a></button>
    </nav>
     <div class="mt-4">
     <div class="card shadow p-3 mb-5">
@@ -28,7 +29,7 @@ require '../config/config.php';
   <form method="POST" action="../backend/add.php">
   <div class="form-group">
   <label name="inputClassroom">Učebňa</label>
-      <select name="inputClassroom" class="form-control">
+      <select name="inputClassroom" class="form-control" required>
     <?php
     $query = "SELECT number FROM classrooms";
     $result = mysqli_query($conn, $query);
@@ -48,11 +49,11 @@ require '../config/config.php';
     </div>
   <div class="form-group">
     <label name="ComputerNumber">Číslo počítača</label>
-    <input class="form-control" name="ComputerNumber" placeholder="PC-13">
+    <input class="form-control" name="ComputerNumber" placeholder="PC-13" required>
   </div>
   <div class="form-group">
     <label name="Description">Popis problému</label>
-    <textarea class="form-control" name="Description" rows="3"></textarea>
+    <textarea class="form-control" name="Description" rows="3" required></textarea>
   </div>
   <button class="btn btn-block btn-primary" name="send">Send</button>
 </form>

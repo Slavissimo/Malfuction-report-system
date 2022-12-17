@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../config/config.php';
 
     if(isset($_POST['login'])) {
@@ -11,9 +12,10 @@ require '../config/config.php';
 
         if(mysqli_num_rows($result) > 0) { 
             $userData = mysqli_fetch_array($result);
-
+            $uid = $userData['id'];
             $dbPass = $userData['password_hash'];
                 if (password_verify($password, $dbPass)) {
+                    $_SESSION['userid'] = $uid;
                     header("Location: ../frontend/classrooms.php");
                 } else {
                     $_SESSION['message'] = "Wrong password";

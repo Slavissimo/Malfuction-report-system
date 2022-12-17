@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once("../config/config.php");
 require_once("../backend/loginconfirm.php");
 include('../frontend/components/alertDanger.php');
