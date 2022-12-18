@@ -102,3 +102,7 @@
 .main-content{
   display: flex;
 }
+.odhlasenie{
+  color: white;
+  text-decoration: none;
+}
