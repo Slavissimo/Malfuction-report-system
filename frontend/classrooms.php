@@ -48,6 +48,7 @@ require '../config/config.php';
                             <tr>
                                 <td><?= $cislo; ?></td>
                                 <td><?= $data['number']; ?></td>
+                                <td><button class="btn btn-info"><a class="odhlasenie" href="../frontend/selectedclassroom.php">View</a></button></td>
                             </tr>
                             <?php
                             $cislo = $cislo +1;

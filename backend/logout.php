@@ -1,9 +1,13 @@
 <?php
+session_start();
 require '../config/config.php';
 
-session_unset();
-session_destroy();
+
+unset($_SESSION['userid']);
+
 header("Location: ../frontend/login.php");
+
+
 
 
 ?>
