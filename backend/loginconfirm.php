@@ -19,12 +19,12 @@ require '../config/config.php';
                     header("Location: ../frontend/classrooms.php");
                 } else {
                     $_SESSION['message'] = "Wrong password";
-                    header("Location: ../frontend/login.php");
+                    header("Location: ../frontend/index.php");
                 }
 
         } else {
             $_SESSION['message'] = "Wrong Username";
-            header("Location: ../frontend/login.php");
+            header("Location: ../frontend/index.php");
         }
     }
 ?>

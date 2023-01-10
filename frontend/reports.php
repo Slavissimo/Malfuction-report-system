@@ -39,7 +39,8 @@ require '../config/config.php';
             </thead>
             <tbody>
                 <?php 
-                    $query = "SELECT classrooms.number, reports.pcnumber, reports.message FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id";
+                    $uid = $_SESSION['userid'];
+                    $query = "SELECT classrooms.number, reports.pcnumber, reports.message FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id WHERE reports.user_id = $uid";
                     $result = mysqli_query($conn, $query);
                     $cislo = 1;
 

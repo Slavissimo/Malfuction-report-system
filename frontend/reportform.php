@@ -1,7 +1,6 @@
 <?php
 require '../backend/add.php';
 require '../config/config.php';
-require '../backend/loggedinstatus.php';
 ?>
 <!DOCTYPE html>
 <html>

@@ -2,6 +2,8 @@
 
 
 require '../config/config.php';
+require '../backend/loggedinstatus.php';
+require '../backend/loginconfirm.php';
 
 if(isset($_POST['send'])) {
     $classrooms = $_POST['inputClassroom'];

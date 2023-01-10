@@ -36,7 +36,7 @@ require '../config/config.php';
             <tbody>
                 <?php 
                     $uid = $_SESSION['userid'];
-                    $query = "SELECT classrooms.number FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id   WHERE user_id = $uid";
+                    $query = "SELECT classrooms.id,classrooms.number FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id  WHERE classrooms_admins.user_id = $uid";
                     $result = mysqli_query($conn, $query);
                     $cislo = 1;
 
@@ -48,7 +48,7 @@ require '../config/config.php';
                             <tr>
                                 <td><?= $cislo; ?></td>
                                 <td><?= $data['number']; ?></td>
-                                <td><button class="btn btn-info"><a class="odhlasenie" href="../frontend/selectedclassroom.php">View</a></button></td>
+                                <td><a href="selectedclassroom.php?id=<?= $data['id']; ?>" class="btn btn-info">View</a></td>
                             </tr>
                             <?php
                             $cislo = $cislo +1;

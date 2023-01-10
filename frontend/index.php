@@ -6,7 +6,9 @@ include('../frontend/components/alertDanger.php');
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="87852869300-s9eeq1np92i30h8o4mqm3casog852em4.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">        <script src="https://kit.fontawesome.com/7a7a8f8bce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="penguin.css">
     <link rel="icon" href="https://cdn.discordapp.com/attachments/670709218340241408/969608874011262976/logo_spse.png" type="image/icon type">
@@ -36,6 +38,7 @@ include('../frontend/components/alertDanger.php');
         <div>
         <button class="btn btn-primary" name="login"> LOGIN </button>
         <p></p>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
         </form>
         <div class="tucniak">
