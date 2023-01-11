@@ -18,7 +18,7 @@ require '../config/config.php';
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
-        <button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i><a class="odhlasenie"href="../backend/logout.php">Logout</a></button>
+        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
    </nav>
    <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
