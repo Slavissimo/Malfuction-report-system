@@ -1,6 +1,17 @@
 <?php
 require '../backend/loggedinstatus.php';
 require '../config/config.php';
+include '../backend/update.php';
+
+
+$uid = $_SESSION['userid'];
+$query = "SELECT classrooms.id,classrooms.number,classrooms.note FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id  WHERE classrooms_admins.user_id = $uid";
+$result = mysqli_query($conn, $query);
+
+$checkedata =  mysqli_fetch_assoc($result);
+$issueddata = $checkedata['note'];
+$classRoom = $checkedata['number'];
+$notecheck = is_null($issueddata);
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +24,19 @@ require '../config/config.php';
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="SPŠE, ticket systém">
         <title>Ticketový systém</title>
+        <script type="text/javascript">
+        function addText(){
+            var div1=document.getElementById("textfield");
+            div1.innerHTML=`
+            <form action='../backend/update.php' method='POST'>
+                <textarea class='form-control' name='notes'></textarea>
+                <input type="hidden" name="classRoom" value="<?=$classRoom;?>"/>
+                <button class='btn btn-dark' name='notesubmit'>
+                <i class='fa-solid fa-check'></i></button>
+            </form>
+            `
+        };
+        </script>
   </head>
   <body class="container-fluid">
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
@@ -31,23 +55,23 @@ require '../config/config.php';
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Miestnosť</th>
+                    <th scope="col">Poznámka</th>
                 </tr>
             </thead>
             <tbody>
                 <?php 
-                    $uid = $_SESSION['userid'];
-                    $query = "SELECT classrooms.id,classrooms.number FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id  WHERE classrooms_admins.user_id = $uid";
-                    $result = mysqli_query($conn, $query);
                     $cislo = 1;
 
                     if(mysqli_num_rows($result) > 0)
                     {
                         foreach($result as $data)
                         {
+                            $note = $data['note']
                             ?>
                             <tr>
                                 <td><?= $cislo; ?></td>
                                 <td><?= $data['number']; ?></td>
+                                <td id="textfield"><?= $notecheck ? '<button class="btn btn-dark" id="btnok" onclick="addText();"><i class="fa-solid fa-plus"></i></button>' : $note ?></td>
                                 <td><a href="selectedclassroom.php?id=<?= $data['id']; ?>" class="btn btn-info">View</a></td>
                             </tr>
                             <?php

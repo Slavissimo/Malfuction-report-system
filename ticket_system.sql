@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: 127.0.0.1
--- Čas generovania: Út 10.Jan 2023, 20:39
+-- Čas generovania: St 11.Jan 2023, 22:45
 -- Verzia serveru: 10.4.25-MariaDB
 -- Verzia PHP: 8.1.10
 
@@ -48,16 +48,17 @@ INSERT INTO `admins` (`id`, `name`, `password`) VALUES
 
 CREATE TABLE `classrooms` (
   `id` int(11) NOT NULL,
-  `number` int(11) DEFAULT NULL
+  `number` int(11) DEFAULT NULL,
+  `note` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Sťahujem dáta pre tabuľku `classrooms`
 --
 
-INSERT INTO `classrooms` (`id`, `number`) VALUES
-(1, 37),
-(2, 22);
+INSERT INTO `classrooms` (`id`, `number`, `note`) VALUES
+(1, 37, 'Test'),
+(2, 22, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,7 +188,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT pre tabuľku `classrooms`
 --
 ALTER TABLE `classrooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pre tabuľku `reports`
