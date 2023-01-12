@@ -40,7 +40,7 @@ require '../backend/loggedinstatus.php';
             <?php 
                     $suid = $_SESSION['userid'];
                     $class_id = $_GET['id'];
-                    $query = "SELECT classrooms.id, classrooms.number, reports.pcnumber, reports.message FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id LEFT JOIN classrooms_admins ON classrooms_admins.classroom_id = reports.classroom_id  WHERE reports.classroom_id = $class_id AND (reports.report_status = 1 OR reports.report_status = 2)";
+                    $query = "SELECT reports.id, classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id LEFT JOIN classrooms_admins ON classrooms_admins.classroom_id = reports.classroom_id  WHERE reports.classroom_id = $class_id AND (reports.report_status = 1 OR reports.report_status = 2)";
                     $result = mysqli_query($conn, $query);
                     $cislo = 1;
 
@@ -57,6 +57,7 @@ require '../backend/loggedinstatus.php';
                                 <td>
                                     <form method="POST" action="../backend/update.php?id=<?= $data['id']; ?>">
                                     <select name="reportStatus" class="form-control" required>
+                                    <option value="<?= $data['report_status']?>"><?php if($data['report_status'] == 1){ echo '';} else {echo 'Robím na tom';}?></option>
                                     <option value="2">Robím na tom</option>
                                     <option value="3">Vyriešené</option>
                                     <option value="4">Nedá sa opraviť</option>
@@ -95,7 +96,7 @@ require '../backend/loggedinstatus.php';
             <?php 
                     $suid = $_SESSION['userid'];
                     $class_num = $_GET['id'];
-                    $queue = "SELECT classrooms.id, classrooms.number, reports.pcnumber, reports.message FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id LEFT JOIN classrooms_admins ON classrooms_admins.classroom_id = reports.classroom_id  WHERE reports.classroom_id = $class_id AND (reports.report_status = 3 OR reports.report_status = 4)";
+                    $queue = "SELECT reports.id, classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id LEFT JOIN classrooms_admins ON classrooms_admins.classroom_id = reports.classroom_id  WHERE reports.classroom_id = $class_id AND (reports.report_status = 3 OR reports.report_status = 4)";
                     $outcome = mysqli_query($conn, $queue);
                     $cislo = 1;
 
@@ -112,6 +113,7 @@ require '../backend/loggedinstatus.php';
                                 <td>
                                     <form method="POST" action="../backend/update.php?id=<?= $data['id']; ?>">
                                     <select name="reportStatus" class="form-control" required>
+                                    <option value="<?= $data['report_status']?>"><?php if($data['report_status'] == 3){ echo 'Vyriešené';} else {echo 'Nedá sa opraviť';}?></option>
                                     <option value="2">Robím na tom</option>
                                     <option value="3">Vyriešené</option>
                                     <option value="4">Nedá sa opraviť</option>
