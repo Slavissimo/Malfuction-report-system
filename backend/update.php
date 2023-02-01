@@ -4,8 +4,15 @@ require '../config/config.php';
 if(isset($_POST['update'])){
     $status = $_POST['reportStatus'];
     $id = $_GET['id'];
-    $query = "UPDATE reports SET report_status = $status  WHERE id = $id";
-    $result = mysqli_query($conn, $query);
+    if($status == "3" or $status == "4"){
+        $date = date('Y-m-d H:i:s');
+        $query = "UPDATE reports SET report_status = '$status', date_of_completion = '$date'  WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+    }
+    else{
+        $query = "UPDATE reports SET report_status = $status  WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+    }
     header("Location: ../frontend/classrooms.php");
 }
 if(isset($_POST['notesubmit'])){

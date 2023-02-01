@@ -1,6 +1,7 @@
 <?php
-require '../backend/add.php';
 require '../config/config.php';
+$query = "SELECT number FROM classrooms";
+$result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,8 +32,6 @@ require '../config/config.php';
   <label name="inputClassroom">Učebňa</label>
       <select name="inputClassroom" class="form-control" required>
     <?php
-    $query = "SELECT number FROM classrooms";
-    $result = mysqli_query($conn, $query);
     if(mysqli_num_rows($result) > 0){
       foreach($result as $data){
         ?>
@@ -48,7 +47,7 @@ require '../config/config.php';
       </select>
     </div>
   <div class="form-group">
-    <label name="ComputerNumber">Číslo počítača</label>
+    <label name="ComputerNumber">Zariadenie</label>
     <input class="form-control" name="ComputerNumber" placeholder="PC-13" required>
   </div>
   <div class="form-group">

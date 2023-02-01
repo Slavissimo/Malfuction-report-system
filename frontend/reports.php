@@ -1,6 +1,10 @@
 <?php
 require '../backend/loggedinstatus.php';
 require '../config/config.php';
+$uid = $_SESSION['userid'];
+$query = "SELECT classrooms.number, reports.pcnumber, reports.message, reports.date_of_report, reports.date_of_completion  FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id WHERE reports.user_id = $uid";
+$result = mysqli_query($conn, $query);
+$cislo = 1;
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,15 +39,12 @@ require '../config/config.php';
                     <th scope="col">Miestnosť</th>
                     <th scope="col">Č.PC</th>
                     <th scope="col">Správa</th>
+                    <th scope="col">Dátum nahlásenia</th>
+                    <th scope="col">Dátum uzatvorenia</th>
                 </tr>
             </thead>
             <tbody>
                 <?php 
-                    $uid = $_SESSION['userid'];
-                    $query = "SELECT classrooms.number, reports.pcnumber, reports.message FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id WHERE reports.user_id = $uid";
-                    $result = mysqli_query($conn, $query);
-                    $cislo = 1;
-
                     if(mysqli_num_rows($result) > 0)
                     {
                         foreach($result as $data)
@@ -54,6 +55,9 @@ require '../config/config.php';
                                 <td><?= $data['number']; ?></td>
                                 <td><?= $data['pcnumber']; ?></td>
                                 <td><?= $data['message']; ?></td>
+                                <td><?= $data['date_of_report']; ?></td>
+                                <td><?= $data['date_of_completion']; ?></td>
+                                <td><button class="btn btn-danger">Remove</button></td>
                             </tr>
                             <?php
                             $cislo = $cislo +1;
