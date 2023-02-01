@@ -16,7 +16,12 @@ require '../config/config.php';
             $dbPass = $userData['password_hash'];
                 if (password_verify($password, $dbPass)) {
                     $_SESSION['userid'] = $uid;
-                    header("Location: ../frontend/classrooms.php");
+                    if($uid == "1"){
+                      header("Location: ../frontend/admin_classrooms.php");
+                    }
+                    else{
+                      header("Location: ../frontend/classrooms.php");
+                    }
                 } else {
                     $_SESSION['message'] = "Wrong password";
                     header("Location: ../frontend/index.php");

@@ -5,8 +5,11 @@ include '../backend/update.php';
 
 
 $uid = $_SESSION['userid'];
-$query = "SELECT classrooms.id,classrooms.number,classrooms.note FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id  WHERE classrooms_admins.user_id = $uid";
+$query = "SELECT classrooms.id,classrooms.number,classrooms.note FROM classrooms";
 $result = mysqli_query($conn, $query);
+
+$teachersQuery = "SELECT users.fname, users.lname FROM users";
+$teachers = mysqli_query($conn, $teachersQuery);
 
 $checkedata =  mysqli_fetch_assoc($result);
 $issueddata = $checkedata['note'];
@@ -23,17 +26,43 @@ $notecheck = is_null($issueddata);
         <meta name="author" content="Slavomír Salončuk">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="SPŠE, ticket systém">
+        <script>
+        const addClassroom = () => {
+            let newclass=document.getElementById("classroom_add");
+            newclass.innerHTML = `
+            <form action="../backend/add.php" method="POST"></td>
+                <td></td>
+
+                <td>
+                    <input type="text" id="classnum" placeholder="Číslo učebne" name="classnum">
+                </td>
+
+                <td>
+                    <select class="form-control">
+                        <?php foreach($teachers as $teacher):?> 
+                            <option> <?= $teacher['fname']?> </option>
+                        <?php endforeach?>
+                    </select>
+                </td>
+
+                <td>
+                    <button name="add" class="btn">ADD</button>
+                </td>
+
+            </form>
+          `
+        };
+        </script>
         <title>Ticketový systém</title>
   </head>
   <body class="container-fluid">
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
-        <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
+        <a class="navbar-brand mb-0 h1" href="admin_reports.php"><i class="fa-solid fa-list-ul"></i>Nahlásenia</a>
         <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
    </nav>
    <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
-                <h2 class="text-center">Moje učebne</h2>
+                <h2 class="text-center">Učebne</h2>
             </div>
         </div>
         <div class="table-responsive">
@@ -42,7 +71,7 @@ $notecheck = is_null($issueddata);
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Miestnosť</th>
-                    <th scope="col">Poznámka</th>
+                    <th scope="col">Správca</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,36 +85,11 @@ $notecheck = is_null($issueddata);
                             $note = $data['note'];
                             $classnum = $data['number'];
                             ?>
-                            <script type="text/javascript">
-                              function addText(){
-                                  var div1=document.getElementById("textfield-<?= $classnum;?>");
-                                  div1.innerHTML=`
-                                  <form action='../backend/update.php' method='POST'>
-                                      <textarea class='form-control' name='notes'></textarea>
-                                      <input type="hidden" name="classRoom" value="<?=$classnum;?>"/>
-                                      <button class='btn btn-dark' name='notesubmit'>
-                                      <i class='fa-solid fa-check'></i></button>
-                                  </form>
-                                  `
-                            };
-                            function editText(id) {
-                                var row = document.getElementById("row" + id);
-                                var textfield = document.getElementById("textfield-" + <?= $classnum;?>);
-                                textfield.innerHTML = `
-                                    <form action='../backend/update.php' method='POST'>
-                                        <textarea class='form-control' name='notes'><?= $note?></textarea>
-                                        <input type="hidden" name="classRoom" value="<?=$classnum;?>"/>
-                                        <button class='btn btn-dark' name='notesubmit'>
-                                        <i class='fa-solid fa-check'></i></button>
-                                    </form>
-                                `
-                            };
-                            </script>
-                            <tr id="row<?= $data['id']?>">
+                            <tr>
                                 <td><?= $cislo; ?></td>
                                 <td><?= $data['number']; ?></td>
-                                <td id="textfield-<?= $classnum?>"><?= $notecheck ? '<button class="btn btn-dark" id="btnok" onclick="addText();"><i class="fa-solid fa-plus"></i></button>' : $note.'<button class="btn btn-dark ml-3" id="btnok" onclick="editText();"><i class="fa-solid fa-pen"></i></button>' ?></td>
-                                <td><a href="selectedclassroom.php?id=<?= $data['id']; ?>" class="btn btn-info">View</a></td>
+                                <td></td>
+                                <td><button class="btn btn-success" onclick="editClassroom();">Edit</button></td>
                             </tr>
                             <?php
                             $cislo = $cislo +1;
@@ -96,6 +100,11 @@ $notecheck = is_null($issueddata);
                         echo '<p class="alert alert-danger mt-1"> There are no reports in your database <p>';
                     }
                 ?>
+                <tr id="classroom_add">
+                </tr>
+                <td>
+                    <button class="btn btn-dark" id="btnok" onclick="addClassroom()"><i class="fa-solid fa-plus"></i></button>
+                </td>
             </tbody>
         </table>
         </div>
