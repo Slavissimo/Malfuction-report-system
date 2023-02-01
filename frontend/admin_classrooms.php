@@ -5,16 +5,11 @@ include '../backend/update.php';
 
 
 $uid = $_SESSION['userid'];
-$query = "SELECT classrooms.id,classrooms.number,classrooms.note FROM classrooms";
+$query = "SELECT classrooms.id,classrooms.number FROM classrooms";
 $result = mysqli_query($conn, $query);
 
 $teachersQuery = "SELECT users.fname, users.lname FROM users";
 $teachers = mysqli_query($conn, $teachersQuery);
-
-$checkedata =  mysqli_fetch_assoc($result);
-$issueddata = $checkedata['note'];
-$classRoom = $checkedata['number'];
-$notecheck = is_null($issueddata);
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,15 +77,41 @@ $notecheck = is_null($issueddata);
                     {
                         foreach($result as $data)
                         {
-                            $note = $data['note'];
                             $classnum = $data['number'];
                             ?>
-                            <tr>
+                            <tr id="<?= $data['number']; ?>">
                                 <td><?= $cislo; ?></td>
                                 <td><?= $data['number']; ?></td>
                                 <td></td>
-                                <td><button class="btn btn-success" onclick="editClassroom();">Edit</button></td>
+                                <td><button class="btn btn-success" onclick="editClassroom(<?= $data['number']; ?>);">Edit</button></td>
                             </tr>
+                            <script>
+                                const editClassroom = (id) => {
+                                    let newclass=document.getElementById(id);
+                                    newclass.innerHTML = `
+                                    <form action="../backend/add.php" method="POST"></td>
+                                        <td></td>
+
+                                        <td>
+                                            <input type="text" id="classnum" placeholder="Číslo učebne" name="classnum">
+                                        </td>
+
+                                        <td>
+                                            <select class="form-control">
+                                                <?php foreach($teachers as $teacher):?> 
+                                                    <option> <?= $teacher['fname']?> </option>
+                                                <?php endforeach?>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <button name="edit" class="btn"><i class='fa-solid fa-check'></i></button>
+                                        </td>
+
+                                    </form>
+                                `
+                                };
+                            </script>
                             <?php
                             $cislo = $cislo +1;
                         }
