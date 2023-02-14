@@ -2,6 +2,13 @@
 require '../config/config.php';
 require '../backend/loggedinstatus.php';
 
+$suid = $_SESSION['userid'];
+$class_id = $_GET['id'];
+$query = "SELECT reports.id, classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id LEFT JOIN classrooms_admins ON classrooms_admins.classroom_id = reports.classroom_id  WHERE reports.classroom_id = $class_id AND (reports.report_status = 1 OR reports.report_status = 2)";
+$result = mysqli_query($conn, $query);
+$cislo = 1;
+$queue = "SELECT reports.id, classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id LEFT JOIN classrooms_admins ON classrooms_admins.classroom_id = reports.classroom_id  WHERE reports.classroom_id = $class_id AND (reports.report_status = 3 OR reports.report_status = 4)";
+$outcome = mysqli_query($conn, $queue);
 ?>
 
 <!DOCTYPE html>
@@ -38,12 +45,6 @@ require '../backend/loggedinstatus.php';
             </thead>
             <tbody>
             <?php 
-                    $suid = $_SESSION['userid'];
-                    $class_id = $_GET['id'];
-                    $query = "SELECT reports.id, classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id LEFT JOIN classrooms_admins ON classrooms_admins.classroom_id = reports.classroom_id  WHERE reports.classroom_id = $class_id AND (reports.report_status = 1 OR reports.report_status = 2)";
-                    $result = mysqli_query($conn, $query);
-                    $cislo = 1;
-
                     if(mysqli_num_rows($result) > 0)
                     {
                         foreach($result as $data)
@@ -94,11 +95,6 @@ require '../backend/loggedinstatus.php';
             </thead>
             <tbody>
             <?php 
-                    $suid = $_SESSION['userid'];
-                    $class_num = $_GET['id'];
-                    $queue = "SELECT reports.id, classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id LEFT JOIN classrooms_admins ON classrooms_admins.classroom_id = reports.classroom_id  WHERE reports.classroom_id = $class_id AND (reports.report_status = 3 OR reports.report_status = 4)";
-                    $outcome = mysqli_query($conn, $queue);
-                    $cislo = 1;
 
                     if(mysqli_num_rows($outcome) > 0)
                     {

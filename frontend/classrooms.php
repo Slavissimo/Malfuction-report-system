@@ -2,7 +2,7 @@
 require '../backend/loggedinstatus.php';
 require '../config/config.php';
 include '../backend/update.php';
-
+include '../frontend/components/Helper.php';
 
 $uid = $_SESSION['userid'];
 $query = "SELECT classrooms.id,classrooms.number,classrooms.note FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id  WHERE classrooms_admins.user_id = $uid";
@@ -53,6 +53,7 @@ $notecheck = is_null($issueddata);
                     {
                         foreach($result as $data)
                         {
+                            $classid = $data['id'];
                             $note = $data['note'];
                             $classnum = $data['number'];
                             ?>
@@ -86,6 +87,17 @@ $notecheck = is_null($issueddata);
                                 <td><?= $data['number']; ?></td>
                                 <td id="textfield-<?= $classnum?>"><?= $notecheck ? '<button class="btn btn-dark" id="btnok" onclick="addText();"><i class="fa-solid fa-plus"></i></button>' : $note.'<button class="btn btn-dark ml-3" id="btnok" onclick="editText();"><i class="fa-solid fa-pen"></i></button>' ?></td>
                                 <td><a href="selectedclassroom.php?id=<?= $data['id']; ?>" class="btn btn-info">View</a></td>
+                                <td><?php
+                                $count = "SELECT COUNT(reports.report_status) AS pocet FROM reports WHERE reports.classroom_id = $classid AND reports.report_status = 1 ";
+                                $res = mysqli_query($conn, $count);
+                                $pocet = mysqli_fetch_assoc($res);
+                                if($pocet['pocet'] > 0){
+                                    echo '<span class="badge bg-danger rounded-pill">New report!</span>';
+                                }
+                                else{
+                                    null;
+                                }
+                                 ?></td>
                             </tr>
                             <?php
                             $cislo = $cislo +1;
@@ -93,7 +105,7 @@ $notecheck = is_null($issueddata);
                     }
                     else
                     {
-                        echo '<p class="alert alert-danger mt-1"> There are no reports in your database <p>';
+                        echo '<p class="alert alert-danger mt-1"> There are no classrooms that you admin <p>';
                     }
                 ?>
             </tbody>
