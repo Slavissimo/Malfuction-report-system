@@ -23,12 +23,12 @@ require '../config/config.php';
                       header("Location: ../frontend/classrooms.php");
                     }
                 } else {
-                    $_SESSION['message'] = "Wrong password";
+                    $_SESSION['messageDanger'] = "Wrong password";
                     header("Location: ../frontend/index.php");
                 }
 
         } else {
-            $_SESSION['message'] = "Wrong Username";
+            $_SESSION['messageDanger'] = "Wrong Username";
             header("Location: ../frontend/index.php");
         }
     }

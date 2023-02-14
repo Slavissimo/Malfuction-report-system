@@ -1,7 +1,6 @@
 <?php
 require_once("../config/config.php");
 require_once("../backend/loginconfirm.php");
-include('../frontend/components/alertDanger.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,6 +22,7 @@ include('../frontend/components/alertDanger.php');
         <h1 class="text-center nadpis">Vitajte!</h1>
       </div>
       <div id="login">
+      <?php include('../frontend/components/alertDanger.php'); ?>
         <h1 class="text-center text">Login</h1>
         <form method="POST" action="../backend/loginconfirm.php">
           <div class="text">

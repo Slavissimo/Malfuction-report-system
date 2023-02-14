@@ -2,7 +2,7 @@
 require '../backend/loggedinstatus.php';
 require '../config/config.php';
 $uid = $_SESSION['userid'];
-$query = "SELECT classrooms.number, reports.pcnumber, reports.message, reports.date_of_report, reports.date_of_completion  FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id WHERE reports.user_id = $uid";
+$query = "SELECT classrooms.number, reports.id, reports.pcnumber, reports.message, reports.date_of_report, reports.date_of_completion  FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id WHERE reports.user_id = $uid";
 $result = mysqli_query($conn, $query);
 $cislo = 1;
 ?>
@@ -22,7 +22,7 @@ $cislo = 1;
   <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
         <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie" href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
    </nav>
    <div class="mt-4">
 
@@ -32,6 +32,8 @@ $cislo = 1;
             </div>
         </div>
         <div class="table-responsive">
+        <?php include('../frontend/components/alertDanger.php'); ?>
+        <?php include('../frontend/components/alertSuccess.php'); ?>
         <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
             <thead class="thead-dark">
                 <tr>
@@ -57,7 +59,7 @@ $cislo = 1;
                                 <td><?= $data['message']; ?></td>
                                 <td><?= $data['date_of_report']; ?></td>
                                 <td><?= $data['date_of_completion']; ?></td>
-                                <td><button class="btn btn-danger">Remove</button></td>
+                                <td><a href="../backend/delete.php?id=<?= $data['id']; ?>"><button class="btn btn-danger" onClick='javascript:return confirm("are you sure you want to delete this?");'>Remove</button></a></td>
                             </tr>
                             <?php
                             $cislo = $cislo +1;

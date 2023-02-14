@@ -88,12 +88,13 @@ $teachers = mysqli_query($conn, $teachersQuery);
                             <script>
                                 const editClassroom = (id) => {
                                     let newclass=document.getElementById(id);
+                                    let num=id;
                                     newclass.innerHTML = `
                                     <form action="../backend/add.php" method="POST"></td>
                                         <td></td>
 
                                         <td>
-                                            <input type="text" id="classnum" placeholder="Číslo učebne" name="classnum">
+                                        `+num+`
                                         </td>
 
                                         <td>
