@@ -1,5 +1,5 @@
 <?php
-require '../config/config.php';
+require 'https://ticketsystemspseke.sk/web/config/config.php';
 $query = "SELECT number FROM classrooms";
 $result = mysqli_query($conn, $query);
 ?>
@@ -19,7 +19,7 @@ $result = mysqli_query($conn, $query);
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="https://ticketsystemspseke.sk/web/backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
    </nav>
     <div class="mt-4">
     <div class="card shadow p-3 mb-5">
@@ -27,7 +27,7 @@ $result = mysqli_query($conn, $query);
                 <h2 class="text-center">Nové nahlásenie</h2>
             </div>
         </div>
-  <form method="POST" action="../backend/add.php">
+  <form method="POST" action="https://ticketsystemspseke.sk/web/backend/add.php">
   <div class="form-group">
   <label name="inputClassroom">Učebňa</label>
       <select name="inputClassroom" class="form-control" required>

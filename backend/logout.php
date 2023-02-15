@@ -1,11 +1,11 @@
 <?php
 session_start();
-require '../config/config.php';
+require 'https://ticketsystemspseke.sk/web/config/config.php';
 
 
 unset($_SESSION['userid']);
 
-header("Location: ../frontend/index.php");
+header("Location: https://ticketsystemspseke.sk/web/frontend/index.php");
 
 
 

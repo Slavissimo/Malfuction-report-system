@@ -1,5 +1,5 @@
 <?php
-require '../config/config.php';
+require 'https://ticketsystemspseke.sk/web/config/config.php';
 
 if(isset($_POST['update'])){
     $status = $_POST['reportStatus'];
@@ -13,13 +13,13 @@ if(isset($_POST['update'])){
         $query = "UPDATE reports SET report_status = $status  WHERE id = $id";
         $result = mysqli_query($conn, $query);
     }
-    header("Location: ../frontend/classrooms.php");
+    header("Location: https://ticketsystemspseke.sk/web/frontend/classrooms.php");
 }
 if(isset($_POST['notesubmit'])){
     $note = $_POST['notes'];
     $classRoom = $_POST['classRoom'];
     $queue = "UPDATE classrooms SET note='$note' WHERE number=$classRoom";
     $result = mysqli_query($conn, $queue);
-    header("Location: ../frontend/classrooms.php");
+    header("Location: https://ticketsystemspseke.sk/web/frontend/classrooms.php");
 }
 ?>

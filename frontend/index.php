@@ -1,6 +1,6 @@
 <?php
-require_once("../config/config.php");
-require_once("../backend/loginconfirm.php");
+require_once("https://ticketsystemspseke.sk/web/config/config.php");
+require_once("https://ticketsystemspseke.sk/web/backend/loginconfirm.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,9 +22,9 @@ require_once("../backend/loginconfirm.php");
         <h1 class="text-center nadpis">Vitajte!</h1>
       </div>
       <div id="login">
-      <?php include('../frontend/components/alertDanger.php'); ?>
+      <?php include('https://ticketsystemspseke.sk/web/frontend/components/alertDanger.php'); ?>
         <h1 class="text-center text">Login</h1>
-        <form method="POST" action="../backend/loginconfirm.php">
+        <form method="POST" action="https://ticketsystemspseke.sk/web/backend/loginconfirm.php">
           <div class="text">
             <input class="form-control" type="text" name="username" required>
             <span></span>

@@ -1,8 +1,7 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../config/config.php';
-include '../backend/update.php';
-include '../frontend/components/Helper.php';
+require 'https://ticketsystemspseke.sk/web/backend/loggedinstatus.php';
+require 'https://ticketsystemspseke.sk/web/config/config.php';
+include 'https://ticketsystemspseke.sk/web/backend/update.php';
 
 $uid = $_SESSION['userid'];
 $query = "SELECT classrooms.id,classrooms.number,classrooms.note FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id  WHERE classrooms_admins.user_id = $uid";
@@ -29,7 +28,7 @@ $notecheck = is_null($issueddata);
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="https://ticketsystemspseke.sk/web/backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
    </nav>
    <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
@@ -61,7 +60,7 @@ $notecheck = is_null($issueddata);
                               function addText(){
                                   var div1=document.getElementById("textfield-<?= $classnum;?>");
                                   div1.innerHTML=`
-                                  <form action='../backend/update.php' method='POST'>
+                                  <form action='https://ticketsystemspseke.sk/web/backend/update.php' method='POST'>
                                       <textarea class='form-control' name='notes'></textarea>
                                       <input type="hidden" name="classRoom" value="<?=$classnum;?>"/>
                                       <button class='btn btn-dark' name='notesubmit'>
@@ -73,7 +72,7 @@ $notecheck = is_null($issueddata);
                                 var row = document.getElementById("row" + id);
                                 var textfield = document.getElementById("textfield-" + <?= $classnum;?>);
                                 textfield.innerHTML = `
-                                    <form action='../backend/update.php' method='POST'>
+                                    <form action='https://ticketsystemspseke.sk/web/backend/update.php' method='POST'>
                                         <textarea class='form-control' name='notes'><?= $note?></textarea>
                                         <input type="hidden" name="classRoom" value="<?=$classnum;?>"/>
                                         <button class='btn btn-dark' name='notesubmit'>
@@ -86,7 +85,7 @@ $notecheck = is_null($issueddata);
                                 <td><?= $cislo; ?></td>
                                 <td><?= $data['number']; ?></td>
                                 <td id="textfield-<?= $classnum?>"><?= $notecheck ? '<button class="btn btn-dark" id="btnok" onclick="addText();"><i class="fa-solid fa-plus"></i></button>' : $note.'<button class="btn btn-dark ml-3" id="btnok" onclick="editText();"><i class="fa-solid fa-pen"></i></button>' ?></td>
-                                <td><a href="selectedclassroom.php?id=<?= $data['id']; ?>" class="btn btn-info">View</a></td>
+                                <td><a href="https://ticketsystemspseke.sk/web/frontend/selectedclassroom.php?id=<?= $data['id']; ?>" class="btn btn-info">View</a></td>
                                 <td><?php
                                 $count = "SELECT COUNT(reports.report_status) AS pocet FROM reports WHERE reports.classroom_id = $classid AND reports.report_status = 1 ";
                                 $res = mysqli_query($conn, $count);

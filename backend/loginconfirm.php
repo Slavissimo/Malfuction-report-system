@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/config.php';
+require 'https://ticketsystemspseke.sk/web/config/config.php';
 
     if(isset($_POST['login'])) {
 
@@ -17,19 +17,19 @@ require '../config/config.php';
                 if (password_verify($password, $dbPass)) {
                     $_SESSION['userid'] = $uid;
                     if($uid == "1"){
-                      header("Location: ../frontend/admin_classrooms.php");
+                      header("Location: https://ticketsystemspseke.sk/web/frontend/admin_classrooms.php");
                     }
                     else{
-                      header("Location: ../frontend/classrooms.php");
+                      header("Location: https://ticketsystemspseke.sk/web/frontend/classrooms.php");
                     }
                 } else {
                     $_SESSION['messageDanger'] = "Wrong password";
-                    header("Location: ../frontend/index.php");
+                    header("Location: https://ticketsystemspseke.sk/web/frontend/index.php");
                 }
 
         } else {
             $_SESSION['messageDanger'] = "Wrong Username";
-            header("Location: ../frontend/index.php");
+            header("Location: https://ticketsystemspseke.sk/web/frontend/index.php");
         }
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
-require '../config/config.php';
-require '../backend/loggedinstatus.php';
+require 'https://ticketsystemspseke.sk/web/config/config.php';
+require 'https://ticketsystemspseke.sk/web/backend/loggedinstatus.php';
 
 $suid = $_SESSION['userid'];
 $class_id = $_GET['id'];
@@ -26,7 +26,7 @@ $outcome = mysqli_query($conn, $queue);
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
         <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="https://ticketsystemspseke.sk/web/backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
 </nav>
 <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
@@ -56,7 +56,7 @@ $outcome = mysqli_query($conn, $queue);
                                 <td><?= $data['pcnumber']; ?></td>
                                 <td><?= $data['message']; ?></td>
                                 <td>
-                                    <form method="POST" action="../backend/update.php?id=<?= $data['id']; ?>">
+                                    <form method="POST" action="https://ticketsystemspseke.sk/web/backend/update.php?id=<?= $data['id']; ?>">
                                     <select name="reportStatus" class="form-control" required>
                                     <option value="<?= $data['report_status']?>"><?php if($data['report_status'] == 1){ echo '';} else {echo 'Robím na tom';}?></option>
                                     <option value="2">Robím na tom</option>
@@ -107,7 +107,7 @@ $outcome = mysqli_query($conn, $queue);
                                 <td><?= $data['pcnumber']; ?></td>
                                 <td><?= $data['message']; ?></td>
                                 <td>
-                                    <form method="POST" action="../backend/update.php?id=<?= $data['id']; ?>">
+                                    <form method="POST" action="https://ticketsystemspseke.sk/web/backend/update.php?id=<?= $data['id']; ?>">
                                     <select name="reportStatus" class="form-control" required>
                                     <option value="<?= $data['report_status']?>"><?php if($data['report_status'] == 3){ echo 'Vyriešené';} else {echo 'Nedá sa opraviť';}?></option>
                                     <option value="2">Robím na tom</option>

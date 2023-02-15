@@ -1,7 +1,7 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../config/config.php';
-include '../backend/update.php';
+require 'https://ticketsystemspseke.sk/web/backend/loggedinstatus.php';
+require 'https://ticketsystemspseke.sk/web/config/config.php';
+include 'https://ticketsystemspseke.sk/web/backend/update.php';
 
 
 $uid = $_SESSION['userid'];
@@ -25,7 +25,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
         const addClassroom = () => {
             let newclass=document.getElementById("classroom_add");
             newclass.innerHTML = `
-            <form action="../backend/add.php" method="POST"></td>
+            <form action="https://ticketsystemspseke.sk/web/backend/add.php" method="POST"></td>
                 <td></td>
 
                 <td>
@@ -35,7 +35,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
                 <td>
                     <select class="form-control">
                         <?php foreach($teachers as $teacher):?> 
-                            <option> <?= $teacher['fname']?> </option>
+                            <option> <?= $teacher['fname']." ".$teacher['lname']?> </option>
                         <?php endforeach?>
                     </select>
                 </td>
@@ -53,7 +53,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
   <body class="container-fluid">
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="admin_reports.php"><i class="fa-solid fa-list-ul"></i>Nahlásenia</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="https://ticketsystemspseke.sk/web/backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
    </nav>
    <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
@@ -90,7 +90,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
                                     let newclass=document.getElementById(id);
                                     let num=id;
                                     newclass.innerHTML = `
-                                    <form action="../backend/add.php" method="POST"></td>
+                                    <form action="https://ticketsystemspseke.sk/web/backend/add.php" method="POST"></td>
                                         <td></td>
 
                                         <td>
@@ -100,7 +100,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
                                         <td>
                                             <select class="form-control">
                                                 <?php foreach($teachers as $teacher):?> 
-                                                    <option> <?= $teacher['fname']?> </option>
+                                                    <option> <?= $teacher['fname']." ".$teacher['lname']?> </option>
                                                 <?php endforeach?>
                                             </select>
                                         </td>

@@ -1,6 +1,11 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../config/config.php';
+require 'https://ticketsystemspseke.sk/web/backend/loggedinstatus.php';
+require 'https://ticketsystemspseke.sk/web/config/config.php';
+
+$uid = $_SESSION['userid'];
+$query = "SELECT classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id";
+$result = mysqli_query($conn, $query);
+$cislo = 1;
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +22,7 @@ require '../config/config.php';
   <body class="container-fluid">
   <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="admin_classrooms.php"><i class="fa-solid fa-people-group"></i>Učebne</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="https://ticketsystemspseke.sk/web/backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
    </nav>
    <div class="mt-4">
 
@@ -39,11 +44,6 @@ require '../config/config.php';
             </thead>
             <tbody>
                 <?php 
-                    $uid = $_SESSION['userid'];
-                    $query = "SELECT classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id";
-                    $result = mysqli_query($conn, $query);
-                    $cislo = 1;
-
                     if(mysqli_num_rows($result) > 0)
                     {
                         foreach($result as $data)
