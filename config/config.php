@@ -1,9 +1,9 @@
 <?php
 
-$host = "dbadmin.ticketsystemspseke.sk"; 
+$host = ""; 
 $user = ""; 
 $password = ""; 
-$db = "ticketsystem"; 
+$db = ""; 
 
 $conn = mysqli_connect($host, $user, $password, $db);
 

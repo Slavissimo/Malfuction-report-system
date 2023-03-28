@@ -1,8 +1,6 @@
 <?php
 require '../config/config.php';
 require '../backend/loggedinstatus.php';
-$query = "SELECT number FROM classrooms";
-$result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,40 +18,31 @@ $result = mysqli_query($conn, $query);
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
-        <a class="navbar-brand mb-0 h1" href="password_change.php"><i class="fa-solid fa-gear"></i>Zmena hesla</a>
+        <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
         <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
    </nav>
     <div class="mt-4">
     <div class="card shadow p-3 mb-5">
             <div>
-                <h2 class="text-center">Nové nahlásenie</h2>
+                <h2 class="text-center">Zmena hesla</h2>
             </div>
         </div>
-  <form method="POST" action="../backend/add.php">
-  <div class="form-group">
-  <label name="inputClassroom">Učebňa</label>
-      <select name="inputClassroom" class="form-control" required>
-    <?php
-    if(mysqli_num_rows($result) > 0){
-      foreach($result as $data):?>
-        <option><?= $data['number']; ?></option>
-        <?php
-      endforeach;}
-    else{
-      echo '<p class="alert alert-danger mt-1"> There are no classrooms in your database <p>';
-    }
-      ?>
-      </select>
-    </div>
-  <div class="form-group">
-    <label name="ComputerNumber">Zariadenie</label>
-    <input class="form-control" name="ComputerNumber" placeholder="PC-13" required>
-  </div>
-  <div class="form-group">
-    <label name="Description">Popis problému</label>
-    <textarea class="form-control" name="Description" rows="3" required></textarea>
-  </div>
-  <button class="btn btn-block btn-primary" name="send">Send</button>
+    <?php include('../frontend/components/alertDanger.php'); ?>
+    <?php include('../frontend/components/alertSuccess.php'); ?>
+  <form method="POST" action="../backend/update.php">
+    <div class="col-xs-3">
+    <label for="old_pass">Staré heslo</label>
+    <input id="old_pass" type="password" class="form-control" name="old_password">
+</div>
+  <div class="col-xs-3">
+    <label for="new_pass">Nové heslo</label>
+    <input id="new_pass" type="password" class="form-control" name="new_password">
+</div>
+  <div class="col-xs-3">
+  <label for="new_pass_verify">Zoapkujte heslo</label>
+  <input id="new_pass_verify" type="password" class="form-control" name="new_password_verify">
+</div>
+  <button class="btn btn-block btn-primary mt-3" name="change">Submit</button>
 </form>
     </div>
   </body>

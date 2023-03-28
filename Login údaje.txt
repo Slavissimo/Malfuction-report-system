@@ -1,9 +1,0 @@
-Užívateľ 1
----------------------
-Prihlasovacie meno: Admin
-Heslo: Heslo1234
-
-Užívateľ 2
----------------------
-Prihlasovacie meno: Ucitel
-Heslo: Ucitel1234

@@ -1,11 +1,11 @@
 <?php
-require_once("https://ticketsystemspseke.sk/web/config/config.php");
-require_once("https://ticketsystemspseke.sk/web/backend/loginconfirm.php");
+session_start();
+require_once("../config/config.php");
 ?>
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <meta name="google-signin-client_id" content="87852869300-s9eeq1np92i30h8o4mqm3casog852em4.apps.googleusercontent.com">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">        <script src="https://kit.fontawesome.com/7a7a8f8bce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css.css">
@@ -22,9 +22,9 @@ require_once("https://ticketsystemspseke.sk/web/backend/loginconfirm.php");
         <h1 class="text-center nadpis">Vitajte!</h1>
       </div>
       <div id="login">
-      <?php include('https://ticketsystemspseke.sk/web/frontend/components/alertDanger.php'); ?>
+      <?php include('../frontend/components/alertDanger.php'); ?>
         <h1 class="text-center text">Login</h1>
-        <form method="POST" action="https://ticketsystemspseke.sk/web/backend/loginconfirm.php">
+        <form method="POST" action="../backend/loginconfirm.php">
           <div class="text">
             <input class="form-control" type="text" name="username" required>
             <span></span>
@@ -38,7 +38,6 @@ require_once("https://ticketsystemspseke.sk/web/backend/loginconfirm.php");
         <div>
         <button class="btn btn-primary" name="login"> LOGIN </button>
         <p></p>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
         </form>
         <div class="tucniak">

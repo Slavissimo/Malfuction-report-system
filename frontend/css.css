@@ -110,3 +110,6 @@
   color: white;
   text-decoration: none
 }
+.width{
+  flex-grow: 8;
+}
