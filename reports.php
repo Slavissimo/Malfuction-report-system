@@ -56,7 +56,7 @@ $cislo = 1;
         <h2 class="text-center">Moje nahlásenia</h2>
       </div>
     </div>
-    <form method="POST" id="report_edit" action="../backend/update.php"></form>
+    <form method="POST" id="report_edit" action="./backend/update.php"></form>
     <div class="table-responsive">
       <?php include('./components/alertDanger.php'); ?>
       <?php include('./components/alertSuccess.php'); ?>
@@ -87,7 +87,7 @@ $cislo = 1;
             <td id="<?= $data['id']; ?>reportdate"><?= date("H:i:s d.m.Y", $date_of_report); ?></td>
             <td id="<?= $data['id']; ?>findate"><?= is_null(($data['date_of_completion'])) ? NULL: date("H:i:s d.m.Y", $date_of_completion)  ?></td>
             <td><button class="btn btn-success" onclick="editReport(<?= $data['id']; ?>);">Upraviť</button></td>
-            <td><a href="../backend/delete.php?id=<?= $data['id']; ?>"><button class="btn btn-danger"
+            <td><a href="./backend/delete.php?id=<?= $data['id']; ?>"><button class="btn btn-danger"
                   onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
           </tr>
           <?php

@@ -68,7 +68,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
             </div>
         </div>
         <div class="table-responsive">
-        <form id="add_class" action='../backend/add.php' method='POST'></form>
+        <form id="add_class" action='./backend/add.php' method='POST'></form>
         <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
             <thead class="thead-dark">
                 <tr>

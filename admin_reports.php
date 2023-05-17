@@ -62,7 +62,7 @@ $cislo = 1;
               <?php  if($data['report_status'] == 1){echo 'Nahlásené';} else if($data['report_status'] == 2){echo 'Robí sa na tom';} else if($data['report_status'] == 3){echo 'Vyriešené';} else{echo 'Nedá sa vyriešiť';}; ?>
             </td>
             <td><button class="btn btn-success" onclick="editReport(<?= $data['id']; ?>);">Upraviť</button></td>
-            <td><a href="../backend/deletereport.php?id=<?= $data['id']; ?>"><button class="btn btn-danger"
+            <td><a href="./backend/deletereport.php?id=<?= $data['id']; ?>"><button class="btn btn-danger"
                   onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
           </tr>
           <?php
@@ -87,7 +87,7 @@ $cislo = 1;
                         <td>` + classnum + `</td>
                         <td>` + pcnum + `</td>
                         <td>` + message + `</td>
-                        <td><form id="admin_edit"action="../backend/update.php" method="POST">
+                        <td><form id="admin_edit"action="./backend/update.php" method="POST">
                         <select class="form-control" name="reportStatus">
                         <option id="1" value="1">Nahlásené</option>
                         <option id="2" value="2">Robí sa na tom</option>

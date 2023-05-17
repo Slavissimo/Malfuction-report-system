@@ -71,7 +71,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
   </head>
   <body class="container-fluid">
    <?php include('./components/Navbar.php'); ?>
-   
+
    <?php include('./components/alertDanger.php'); ?>
    <?php include('./components/alertSuccess.php'); ?>
    <div class="card shadow p-3 mb-5 bg-body rounded">
@@ -80,8 +80,8 @@ $teachers = mysqli_query($conn, $teachersQuery);
             </div>
         </div>
         <div class="table-responsive">
-        <form id="edit_user" action="../backend/update.php" method="POST"></form>
-        <form id="add_user" action='../backend/add.php' method='POST'></form>
+        <form id="edit_user" action="./backend/update.php" method="POST"></form>
+        <form id="add_user" action='./backend/add.php' method='POST'></form>
         <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
             <thead class="thead-dark">
                 <tr>
@@ -107,7 +107,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
           <td id="<?= $data['id']; ?>email"><?= $data['email']?></td>
           <td id="<?= $data['id']; ?>username"><?= $data['username']?></td>
           <td><button class="btn btn-success" onclick="editUser(<?= $data['id']; ?>);">Upraviť</button></td>
-          <td><a href="../backend/deleteuser.php?id=<?= $data['id']; ?>"><button class="btn btn-danger" onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
+          <td><a href="./backend/deleteuser.php?id=<?= $data['id']; ?>"><button class="btn btn-danger" onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
         </tr>
   <?php
         $cislo = $cislo +1;

@@ -27,7 +27,7 @@ $result = mysqli_query($conn, $query);
                 <h2 class="text-center">Nové nahlásenie</h2>
             </div>
         </div>
-  <form method="POST" action="../backend/add.php">
+  <form method="POST" action="./backend/add.php">
   <div class="form-group">
   <label name="inputClassroom">Učebňa</label>
       <select name="inputClassroom" class="form-control" required>

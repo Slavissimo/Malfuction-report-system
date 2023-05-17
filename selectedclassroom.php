@@ -53,7 +53,7 @@ $outcome = mysqli_query($conn, $queue);
                                 <td><?= $data['pcnumber']; ?></td>
                                 <td><?= $data['message']; ?></td>
                                 <td>
-                                    <form id="edit_report<?= $data['id']; ?>" method="POST" action="../backend/update.php"></form>
+                                    <form id="edit_report<?= $data['id']; ?>" method="POST" action="./backend/update.php"></form>
                                     <select form="edit_report<?= $data['id']; ?>" name="reportStatus" class="form-control" required>
                                     <option value="<?= $data['report_status']?>"><?php if($data['report_status'] == 1){ echo '';} else {echo 'Robím na tom';}?></option>
                                     <option value="2">Robím na tom</option>
@@ -105,7 +105,7 @@ $outcome = mysqli_query($conn, $queue);
                                 <td><?= $info['pcnumber']; ?></td>
                                 <td><?= $info['message']; ?></td>
                                 <td>
-                                    <form id="edit_report<?= $info['id']; ?>" method="POST" action="../backend/update.php"></form>
+                                    <form id="edit_report<?= $info['id']; ?>" method="POST" action="/backend/update.php"></form>
                                     <select form="edit_report<?= $info['id']; ?>" name="reportStatus" class="form-control" required>
                                     <option value="<?= $info['report_status']?>"><?php if($info['report_status'] == 3){ echo 'Vyriešené';} else {echo 'Nedá sa opraviť';}?></option>
                                     <option value="2">Robím na tom</option>
