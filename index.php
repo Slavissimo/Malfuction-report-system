@@ -1,12 +1,14 @@
 <?php
 require './backend/config/config.php';
+session_start();
 
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css "/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">        <script src="https://kit.fontawesome.com/7a7a8f8bce.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">        
+    <script src="https://kit.fontawesome.com/7a7a8f8bce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="penguin.css">
     <link rel="icon" href="https://cdn.discordapp.com/attachments/670709218340241408/969608874011262976/logo_spse.png" type="image/icon type">
@@ -32,7 +34,6 @@ require './backend/config/config.php';
         <h1 class="text-center nadpis mt-3">Vitajte!</h1>
       </div>
       <div id="login">
-      <?php include('./components/alertDanger.php'); ?>
         <h1 class="text-center text mt-3">Prihlásenie sa</h1>
         <form method="POST" action="./backend/loginconfirm.php">
           <div style="margin: 1rem" class="text">
@@ -47,6 +48,7 @@ require './backend/config/config.php';
         </div>
         <div class="tlacidlo text-center">
         <button class="btn btn-primary btn-lg btn-group-justified" name="login"> Prihlásiť </button>
+        <?php include('./components/alertDanger.php'); ?>
         </div>
         </form>
         <div class="tucniak">
