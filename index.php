@@ -1,12 +1,12 @@
 <?php
 session_start();
-require_once("../config/config.php");
+require '../config/config.php';
+
 ?>
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <meta name="google-signin-client_id" content="87852869300-s9eeq1np92i30h8o4mqm3casog852em4.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css "/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">        <script src="https://kit.fontawesome.com/7a7a8f8bce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="penguin.css">
@@ -15,6 +15,17 @@ require_once("../config/config.php");
     <meta name="author" content="Slavomír Salončuk">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="SPŠE, ticket systém">
+    <script>
+        function show(){
+            var password = document.getElementById('password');
+            if(password.type==="password"){
+                password.type="text";
+            }
+            else{
+                password.type="password";
+            }
+        }
+    </script>
     <title>Ticketový systém</title>
   </head>
   <body class="login_kontainer">
@@ -22,22 +33,21 @@ require_once("../config/config.php");
         <h1 class="text-center nadpis">Vitajte!</h1>
       </div>
       <div id="login">
-      <?php include('../frontend/components/alertDanger.php'); ?>
-        <h1 class="text-center text">Login</h1>
-        <form method="POST" action="../backend/loginconfirm.php">
+      <?php include('./components/alertDanger.php'); ?>
+        <h1 class="text-center text">Prihlásenie sa</h1>
+        <form method="POST" action="./backend/loginconfirm.php">
           <div class="text">
+            <label>Prihlasovacie meno</label>
             <input class="form-control" type="text" name="username" required>
             <span></span>
-            <label>Prihlasovacie meno</label>
         </div>
         <div class="text">
-            <input class="form-control" type="password" name="password" required>
-            <span></span>
             <label>Heslo</label>
+            <input id="password" class="form-control" type="password" name="password" required>
+            <span onclick="show()"><input class="btn-check" type="checkbox"> Zobraziť heslo</span>
         </div>
-        <div>
-        <button class="btn btn-primary" name="login"> LOGIN </button>
-        <p></p>
+        <div class="tlacidlo text-center">
+        <button class="btn btn-primary btn-lg btn-group-justified" name="login"> Prihlásiť </button>
         </div>
         </form>
         <div class="tucniak">

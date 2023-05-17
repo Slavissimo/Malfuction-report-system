@@ -1,7 +1,7 @@
 <?php
 require '../backend/loggedinstatus.php';
 require '../config/config.php';
-include '../backend/Helper.php';
+
 $uid = $_SESSION['userid'];
 $query = "SELECT classrooms.number, reports.id, reports.pcnumber, reports.message, reports.date_of_report, reports.date_of_completion  FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id WHERE reports.user_id = $uid";
 $result = mysqli_query($conn, $query);
@@ -51,7 +51,7 @@ $cislo = 1;
     <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
     <a class="navbar-brand mb-0 h1" href="password_change.php"><i class="fa-solid fa-gear"></i>Zmena hesla</a>
     <a class="odhlasenie" href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i
-          class="fa-solid fa-power-off"></i>Logout</button></a>
+          class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
   </nav>
   <div class="mt-4">
 
@@ -62,14 +62,14 @@ $cislo = 1;
     </div>
     <form method="POST" id="report_edit" action="../backend/update.php"></form>
     <div class="table-responsive">
-      <?php include('../frontend/components/alertDanger.php'); ?>
-      <?php include('../frontend/components/alertSuccess.php'); ?>
+      <?php include('./components/alertDanger.php'); ?>
+      <?php include('./components/alertSuccess.php'); ?>
       <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Miestnosť</th>
-            <th scope="col">Č.PC</th>
+            <th scope="col">Zariadenie</th>
             <th scope="col">Správa</th>
             <th scope="col">Dátum nahlásenia</th>
             <th scope="col">Dátum uzatvorenia</th>
@@ -90,9 +90,9 @@ $cislo = 1;
             <td id="<?= $data['id']; ?>message"><?= $data['message']; ?></td>
             <td id="<?= $data['id']; ?>reportdate"><?= date("H:i:s d.m.Y", $date_of_report); ?></td>
             <td id="<?= $data['id']; ?>findate"><?= is_null(($data['date_of_completion'])) ? NULL: date("H:i:s d.m.Y", $date_of_completion)  ?></td>
-            <td><button class="btn btn-success" onclick="editReport(<?= $data['id']; ?>);">Edit</button></td>
+            <td><button class="btn btn-success" onclick="editReport(<?= $data['id']; ?>);">Upraviť</button></td>
             <td><a href="../backend/delete.php?id=<?= $data['id']; ?>"><button class="btn btn-danger"
-                  onClick='javascript:return confirm("are you sure you want to delete this?");'>Remove</button></a></td>
+                  onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
           </tr>
           <?php
                             $cislo = $cislo +1;
@@ -100,7 +100,7 @@ $cislo = 1;
                     }
                     else
                     {
-                        echo '<p class="alert alert-danger mt-1"> There are no reports in your database <p>';
+                        echo '<p class="alert alert-danger mt-1"> Nevytvoril si žiadne nahlásenie <p>';
                     }
                 ?>
         </tbody>

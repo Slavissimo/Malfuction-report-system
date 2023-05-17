@@ -1,7 +1,7 @@
 <?php
-require '../config/config.php';
 require '../backend/loggedinstatus.php';
-include '../backend/Helper.php';
+require '../config/config.php';
+
 
 $suid = $_SESSION['userid'];
 $class_id = $_GET['id'];
@@ -10,7 +10,6 @@ $result = mysqli_query($conn, $query);
 $cislo = 1;
 $queue = "SELECT reports.id, classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON reports.classroom_id = classrooms.id LEFT JOIN classrooms_admins ON classrooms_admins.classroom_id = reports.classroom_id  WHERE reports.classroom_id = $class_id AND (reports.report_status = 3 OR reports.report_status = 4)";
 $outcome = mysqli_query($conn, $queue);
-debug($_POST);
 ?>
 
 <!DOCTYPE html>
@@ -30,11 +29,11 @@ debug($_POST);
         <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
         <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
         <a class="navbar-brand mb-0 h1" href="password_change.php"><i class="fa-solid fa-gear"></i>Zmena hesla</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
 </nav>
 <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
-                <h2 class="text-center">Pending</h2>
+                <h2 class="text-center">Nevyriešené nahlásenia</h2>
             </div>
         </div>
 <div class="table-responsive">
@@ -76,7 +75,7 @@ debug($_POST);
                     }
                     else
                     {
-                        echo '<p class="alert alert-danger mt-1"> There are no pending reports <p>';
+                        echo '<p class="alert alert-danger mt-1"> Nemáš žiadne nevyriešené nahlásenia <p>';
                     }
                 ?>
             </tbody>
@@ -84,7 +83,7 @@ debug($_POST);
         </div>
         <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
-                <h2 class="text-center">Done</h2>
+                <h2 class="text-center">Vyriešené nahlásenia</h2>
             </div>
         </div>
 <div class="table-responsive">
@@ -128,7 +127,7 @@ debug($_POST);
                     }
                     else
                     {
-                        echo '<p class="alert alert-danger mt-1"> There are no finished reports <p>';
+                        echo '<p class="alert alert-danger mt-1"> Nemáš žiadne vyriešené nahlásenia <p>';
                     }
                 ?>
             </tbody>

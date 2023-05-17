@@ -1,5 +1,6 @@
 <?php
 require '../backend/loggedinstatus.php';
+require '../backend/admincheck.php';
 require '../config/config.php';
 
 $uid = $_SESSION['userid'];
@@ -29,11 +30,13 @@ $cislo = 1;
     <a class="navbar-brand mb-0 h1" href="admin_classrooms.php"><i class="fa-solid fa-people-group"></i>Učebne</a>
     <a class="navbar-brand mb-0 h1" href="admin_users.php"><i class="fa-solid fa-person"></i>Používatelia</a>
     <a class="odhlasenie" href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i
-          class="fa-solid fa-power-off"></i>Logout</button></a>
+          class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
   </nav>
   <div class="mt-4">
 
     <div class="card shadow p-3 mb-5 bg-body rounded">
+    <?php include('./components/alertDanger.php'); ?>
+    <?php include('./components/alertSuccess.php'); ?>
       <div>
         <h2 class="text-center">Nahlásenia</h2>
       </div>
@@ -63,9 +66,9 @@ $cislo = 1;
             <td>
               <?php  if($data['report_status'] == 1){echo 'Nahlásené';} else if($data['report_status'] == 2){echo 'Robí sa na tom';} else if($data['report_status'] == 3){echo 'Vyriešené';} else{echo 'Nedá sa vyriešiť';}; ?>
             </td>
-            <td><button class="btn btn-success" onclick="editReport(<?= $data['id']; ?>);">Edit</button></td>
+            <td><button class="btn btn-success" onclick="editReport(<?= $data['id']; ?>);">Upraviť</button></td>
             <td><a href="../backend/deletereport.php?id=<?= $data['id']; ?>"><button class="btn btn-danger"
-                  onClick='javascript:return confirm("are you sure you want to delete this?");'>Remove</button></a></td>
+                  onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
           </tr>
           <?php
                             $cislo = $cislo +1;
@@ -73,7 +76,7 @@ $cislo = 1;
                     }
                     else
                     {
-                        echo '<p class="alert alert-danger mt-1"> There are no reports in your database <p>';
+                        echo '<p class="alert alert-danger mt-1"> Nie sú vytvorené žiadne nahlásenia <p>';
                     }
                     
                 ?>

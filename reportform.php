@@ -1,6 +1,7 @@
 <?php
-require '../config/config.php';
 require '../backend/loggedinstatus.php';
+require '../config/config.php';
+
 $query = "SELECT number FROM classrooms";
 $result = mysqli_query($conn, $query);
 ?>
@@ -21,7 +22,7 @@ $result = mysqli_query($conn, $query);
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
         <a class="navbar-brand mb-0 h1" href="password_change.php"><i class="fa-solid fa-gear"></i>Zmena hesla</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
    </nav>
     <div class="mt-4">
     <div class="card shadow p-3 mb-5">
@@ -40,7 +41,7 @@ $result = mysqli_query($conn, $query);
         <?php
       endforeach;}
     else{
-      echo '<p class="alert alert-danger mt-1"> There are no classrooms in your database <p>';
+      echo '<p class="alert alert-danger mt-1"> Nie sú vytvorené žiadne miestnosti <p>';
     }
       ?>
       </select>
@@ -53,7 +54,7 @@ $result = mysqli_query($conn, $query);
     <label name="Description">Popis problému</label>
     <textarea class="form-control" name="Description" rows="3" required></textarea>
   </div>
-  <button class="btn btn-block btn-primary" name="send">Send</button>
+  <button class="btn btn-block btn-primary" name="send">Odoslať</button>
 </form>
     </div>
   </body>

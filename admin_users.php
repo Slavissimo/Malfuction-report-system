@@ -1,7 +1,7 @@
 <?php
 require '../backend/loggedinstatus.php';
+require '../backend/admincheck.php';
 require '../config/config.php';
-include '../backend/Helper.php';
 
 $uid = $_SESSION['userid'];
 $query = "SELECT users.id, users.fname, users.lname, users.email, users.username FROM users WHERE users.id >=2";
@@ -14,6 +14,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
 <html>
   <head>
         <link rel="stylesheet" href="css.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">        <script src="https://kit.fontawesome.com/7a7a8f8bce.js" crossorigin="anonymous"></script>
         <link rel="icon" href="https://cdn.discordapp.com/attachments/670709218340241408/969608874011262976/logo_spse.png" type="image/icon type">
         <meta charset="UTF-8">
@@ -35,7 +36,8 @@ $teachers = mysqli_query($conn, $teachersQuery);
             <td>`+email+`</td>
             <td>`+username+`</td>
             <td>
-            <td><input form="edit_user" type="password" name="pass_update"></td>
+            <td><input class="form-control" form="edit_user" id="password" type="password" name="pass_update" placeholder="Zadaj nové heslo"></td>
+            <td><i class="bi bi-eye" onclick="show()"></i></td>
             <td>
             <input form="edit_user" type="hidden" name="id" value="`+id+`">
             <button form="edit_user" name="edit_user" class="btn"><i class='fa-solid fa-check'></i></button>
@@ -47,24 +49,34 @@ $teachers = mysqli_query($conn, $teachersQuery);
             var div1=document.getElementById("user_add");
             div1.innerHTML=`
             <td>`+id+`</td>
-            <td><input placeholder="Meno" type="text" name="meno" form="add_user"></td>
-            <td><input placeholder="Priezvisko" type="text" name="priezvisko" form="add_user"></td>
-            <td><input placeholder="E-mail" type="text" name="email" form="add_user"></td>
-            <td><input placeholder="Prihlasovacie meno" type="text" name="username" form="add_user"></td>
-            <td><input placeholder="Heslo" type="password" name="password" form="add_user"></td>
+            <td><input class="form-control" placeholder="Meno" type="text" name="meno" form="add_user"></td>
+            <td><input class="form-control" placeholder="Priezvisko" type="text" name="priezvisko" form="add_user"></td>
+            <td><input class="form-control" placeholder="E-mail" type="text" name="email" form="add_user"></td>
+            <td><input class="form-control" placeholder="Prihlasovacie meno" type="text" name="username" form="add_user"></td>
+            <td><input class="form-control" placeholder="Heslo" id="password" type="password" name="password" form="add_user"></td>
+            <td><i class="bi bi-eye" onclick="show()"></i></td>
             <td><button class="btn" name="add_user" form="add_user">ADD</button></td>
             `
       };
+        function show(){
+            var password = document.getElementById('password');
+            if(password.type==="password"){
+                password.type="text";
+            }
+            else{
+                password.type="password";
+            }
+        };
         </script>
   </head>
   <body class="container-fluid">
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="admin_reports.php"><i class="fa-solid fa-list-ul"></i>Nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="admin_classrooms.php"><i class="fa-solid fa-people-group"></i>Učebne</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
    </nav>
-   <?php include('../frontend/components/alertDanger.php'); ?>
-   <?php include('../frontend/components/alertSuccess.php'); ?>
+   <?php include('./components/alertDanger.php'); ?>
+   <?php include('./components/alertSuccess.php'); ?>
    <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
                 <h2 class="text-center">Používatelia</h2>
@@ -97,8 +109,8 @@ $teachers = mysqli_query($conn, $teachersQuery);
           <td id="<?= $data['id']; ?>lname"><?= $data['lname']?></td>
           <td id="<?= $data['id']; ?>email"><?= $data['email']?></td>
           <td id="<?= $data['id']; ?>username"><?= $data['username']?></td>
-          <td><button class="btn btn-success" onclick="editUser(<?= $data['id']; ?>);">Edit</button></td>
-          <td><a href="../backend/deleteuser.php?id=<?= $data['id']; ?>"><button class="btn btn-danger" onClick='javascript:return confirm("are you sure you want to delete this?");'>Remove</button></a></td>
+          <td><button class="btn btn-success" onclick="editUser(<?= $data['id']; ?>);">Upraviť</button></td>
+          <td><a href="../backend/deleteuser.php?id=<?= $data['id']; ?>"><button class="btn btn-danger" onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
         </tr>
   <?php
         $cislo = $cislo +1;
@@ -106,7 +118,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
     }
     else
     {
-      echo '<p class="alert alert-danger mt-1"> There are no reports in your database <p>';
+      echo '<p class="alert alert-danger mt-1"> Nie sú vytvorený žiadny používatelia <p>';
     }
   ?>
   <tr id="user_add"></tr>

@@ -1,8 +1,6 @@
 <?php
 require '../backend/loggedinstatus.php';
 require '../config/config.php';
-include '../backend/Helper.php';
-error_reporting(E_ALL ^ E_NOTICE);
 
 $uid = $_SESSION['userid'];
 $query = "SELECT classrooms.id,classrooms.number,classrooms.note FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id  WHERE classrooms_admins.user_id = $uid";
@@ -42,14 +40,14 @@ $result = mysqli_query($conn, $query);
         <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
         <a class="navbar-brand mb-0 h1" href="password_change.php"><i class="fa-solid fa-gear"></i>Zmena hesla</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásenie sa</button></a>
    </nav>
    <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
                 <h2 class="text-center">Moje učebne</h2>
             </div>
-        <?php include('../frontend/components/alertDanger.php'); ?>
-        <?php include('../frontend/components/alertSuccess.php'); ?>
+        <?php include('./components/alertDanger.php'); ?>
+        <?php include('./components/alertSuccess.php'); ?>
         </div>
         <div class="table-responsive">
         <form id="note" action='../backend/update.php' method='POST'></form>
@@ -77,13 +75,13 @@ $result = mysqli_query($conn, $query);
                                 <td id="<?= $cislo?>num"><?= $data['number']; ?></td>
                                 <td id="<?= $cislo?>note"><?= $note?></td>
                                 <td><button class="btn btn-dark ml-3" id="btnok" onclick="editText(<?= $cislo?>);"><i class="fa-solid fa-pen"></i></button></td>
-                                <td><a href="../frontend/selectedclassroom.php?id=<?= $data['id']; ?>" class="btn btn-info">View</a></td>
+                                <td><a href="/selectedclassroom.php?id=<?= $data['id']; ?>" class="btn btn-info">Ďalej</a></td>
                                 <td><?php
                                 $count = "SELECT COUNT(reports.report_status) AS pocet FROM reports WHERE reports.classroom_id = $classid AND reports.report_status = 1 ";
                                 $res = mysqli_query($conn, $count);
                                 $pocet = mysqli_fetch_assoc($res);
                                 if($pocet['pocet'] > 0){
-                                    echo '<span class="badge bg-danger rounded-pill">New report!</span>';
+                                    echo '<span class="badge bg-danger rounded-pill">Nové nahlásenie!</span>';
                                 }
                                 else{
                                     null;
@@ -96,7 +94,7 @@ $result = mysqli_query($conn, $query);
                     }
                     else
                     {
-                        echo '<p class="alert alert-danger mt-1"> There are no classrooms that you admin <p>';
+                        echo '<p class="alert alert-danger mt-1"> Nespravuješ žiadne miestnosti <p>';
                     }
                 ?>
             </tbody>

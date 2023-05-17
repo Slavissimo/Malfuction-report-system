@@ -1,7 +1,7 @@
 <?php
 require '../backend/loggedinstatus.php';
+require '../backend/admincheck.php';
 require '../config/config.php';
-include '../backend/Helper.php';
 
 $uid = $_SESSION['userid'];
 $query = "SELECT classrooms.id,classrooms.number, users.fname, users.lname FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id LEFT JOIN users ON users.id = classrooms_admins.user_id";
@@ -28,7 +28,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
             newclass.innerHTML = `
             <td>`+id+`</td>
             <td>`+classnum+`</td>
-            <td><form id="edit_class" action="../backend/update.php?id=`+id+`" method="POST">
+            <td><form id="edit_class" action="./backend/update.php?id=`+id+`" method="POST">
                   <select class="form-control" name="teacher">
                     <?php foreach($teachers as $teacher):?> 
                       <option id="<?= $teacher['id']?>" value="<?= $teacher['id']?>"> <?= $teacher['fname']." ".$teacher['lname']?> </option>
@@ -44,7 +44,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
             var div1=document.getElementById("classroom_add");
             div1.innerHTML=`
             <td>`+id+`</td>
-            <td><input type="text" name="classnum" form="add_class"></td>
+            <td><input class="form-control" type="text" name="classnum" form="add_class"></td>
             <td>
             <select class="form-control" name="teacher" form="add_class">
             <?php foreach($teachers as $teacher):?> 
@@ -52,7 +52,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
             <?php endforeach?>
             </option>
             </select></td>
-            <td><button class="btn" name="add" form="add_class">ADD</button></td>
+            <td><button class="btn" name="add" form="add_class">Pridať</button></td>
             `
       };
         </script>
@@ -61,10 +61,10 @@ $teachers = mysqli_query($conn, $teachersQuery);
     <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand mb-0 h1" href="admin_reports.php"><i class="fa-solid fa-list-ul"></i>Nahlásenia</a>
         <a class="navbar-brand mb-0 h1" href="admin_users.php"><i class="fa-solid fa-person"></i>Používatelia</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Logout</button></a>
+        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
    </nav>
-   <?php include('../frontend/components/alertDanger.php'); ?>
-   <?php include('../frontend/components/alertSuccess.php'); ?>
+   <?php include('./components/alertDanger.php'); ?>
+   <?php include('./components/alertSuccess.php'); ?>
    <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="mt-5">
                 <h2 class="text-center">Učebne</h2>
@@ -93,8 +93,8 @@ $teachers = mysqli_query($conn, $teachersQuery);
           <td><?= $cislo; ?></td>
           <td id="<?= $data['id']; ?>num"><?= $data['number']; ?></td>
           <td><?= $data['fname']. " ".$data['lname']?></td>
-          <td><button class="btn btn-success" onclick="editClassroom(<?= $data['id']; ?>);">Edit</button></td>
-          <td><a href="../backend/deleteclass.php?id=<?= $data['id']; ?>"><button class="btn btn-danger" onClick='javascript:return confirm("are you sure you want to delete this?");'>Remove</button></a></td>
+          <td><button class="btn btn-success" onclick="editClassroom(<?= $data['id']; ?>);">Upraviť</button></td>
+          <td><a href="./backend/deleteclass.php?id=<?= $data['id']; ?>"><button class="btn btn-danger" onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
         </tr>
   <?php
         $cislo = $cislo +1;
@@ -102,7 +102,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
     }
     else
     {
-      echo '<p class="alert alert-danger mt-1"> There are no reports in your database <p>';
+      echo '<p class="alert alert-danger mt-1"> Nie sú vytvorené žiadne miestnosti <p>';
     }
   ?>
   <tr id="classroom_add"></tr>
