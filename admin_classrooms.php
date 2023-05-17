@@ -1,7 +1,10 @@
 <?php
 require './backend/middleware/isLogged.php';
-require './backend/middleware/isAdmin.php';
 require './backend/config/config.php';
+
+if($_SESSION['userid'] != 1){
+  header("Location: ../classrooms.php");
+}
 
 $uid = $_SESSION['userid'];
 $query = "SELECT classrooms.id,classrooms.number, users.fname, users.lname FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id LEFT JOIN users ON users.id = classrooms_admins.user_id";

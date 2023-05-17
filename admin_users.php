@@ -1,7 +1,10 @@
 <?php
 require './backend/middleware/isLogged.php';
-require './backend/middleware/isAdmin.php';
 require './backend/config/config.php';
+
+if($_SESSION['userid'] != 1){
+  header("Location: ../classrooms.php");
+}
 
 $uid = $_SESSION['userid'];
 $query = "SELECT users.id, users.fname, users.lname, users.email, users.username FROM users WHERE users.id >=2";

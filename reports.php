@@ -3,7 +3,13 @@ require './backend/middleware/isLogged.php';
 require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
-$query = "SELECT classrooms.number, reports.id, reports.pcnumber, reports.message, reports.date_of_report, reports.date_of_completion  FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id WHERE reports.user_id = $uid";
+
+$query = "SELECT classrooms.number, reports.id, reports.pcnumber, reports.message, reports.date_of_report, reports.date_of_completion 
+          FROM reports 
+          LEFT JOIN classrooms ON classrooms.id = reports.classroom_id 
+          WHERE reports.user_id = $uid 
+          ORDER BY reports.date_of_report DESC";
+
 $result = mysqli_query($conn, $query);
 $cislo = 1;
 ?>
@@ -71,9 +77,12 @@ $cislo = 1;
             <th scope="col">Správa</th>
             <th scope="col">Dátum nahlásenia</th>
             <th scope="col">Dátum uzatvorenia</th>
+            <th scope="col"><button class="btn btn-info">Od najnovších</button></th>
+            <th scope="col"><button class="btn btn-info">Od najstarších</button></th>
           </tr>
         </thead>
         <tbody>
+          
           <?php 
                     if(mysqli_num_rows($result) > 0)
                     {
