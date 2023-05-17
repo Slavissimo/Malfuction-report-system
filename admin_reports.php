@@ -1,7 +1,7 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../backend/admincheck.php';
-require '../config/config.php';
+require './backend/middleware/isLogged.php';
+require './backend/middleware/isAdmin.php';
+require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
 $query = "SELECT reports.id, classrooms.number, reports.pcnumber, reports.message, reports.report_status FROM reports LEFT JOIN classrooms ON classrooms.id = reports.classroom_id";
@@ -26,21 +26,17 @@ $cislo = 1;
 </head>
 
 <body class="container-fluid">
-  <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
-    <a class="navbar-brand mb-0 h1" href="admin_classrooms.php"><i class="fa-solid fa-people-group"></i>Učebne</a>
-    <a class="navbar-brand mb-0 h1" href="admin_users.php"><i class="fa-solid fa-person"></i>Používatelia</a>
-    <a class="odhlasenie" href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i
-          class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
-  </nav>
-  <div class="mt-4">
+  <?php include('./components/Navbar.php'); ?>
 
-    <div class="card shadow p-3 mb-5 bg-body rounded">
-    <?php include('./components/alertDanger.php'); ?>
-    <?php include('./components/alertSuccess.php'); ?>
+  <div class="mt-4">
+    <div class="p-1 m-5">
       <div>
-        <h2 class="text-center">Nahlásenia</h2>
+        <h2 class="text-center mt-5">Nahlásenia</h2>
+        <?php include('./components/alertDanger.php'); ?>
+        <?php include('./components/alertSuccess.php'); ?>
       </div>
     </div>
+
     <div class="table-responsive">
       <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
         <thead class="thead-dark">
@@ -67,7 +63,7 @@ $cislo = 1;
               <?php  if($data['report_status'] == 1){echo 'Nahlásené';} else if($data['report_status'] == 2){echo 'Robí sa na tom';} else if($data['report_status'] == 3){echo 'Vyriešené';} else{echo 'Nedá sa vyriešiť';}; ?>
             </td>
             <td><button class="btn btn-success" onclick="editReport(<?= $data['id']; ?>);">Upraviť</button></td>
-            <td><a href="../backend/deletereport.php?id=<?= $data['id']; ?>"><button class="btn btn-danger"
+            <td><a href="./backend/deletereport.php?id=<?= $data['id']; ?>"><button class="btn btn-danger"
                   onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
           </tr>
           <?php
@@ -92,7 +88,7 @@ $cislo = 1;
                         <td>` + classnum + `</td>
                         <td>` + pcnum + `</td>
                         <td>` + message + `</td>
-                        <td><form id="admin_edit"action="../backend/update.php" method="POST">
+                        <td><form id="admin_edit"action="./backend/update.php" method="POST">
                         <select class="form-control" name="reportStatus">
                         <option id="1" value="1">Nahlásené</option>
                         <option id="2" value="2">Robí sa na tom</option>

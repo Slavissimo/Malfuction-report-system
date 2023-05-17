@@ -1,6 +1,6 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../config/config.php';
+require './backend/middleware/isLogged.php';
+require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
 $query = "SELECT classrooms.id,classrooms.number,classrooms.note FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id  WHERE classrooms_admins.user_id = $uid";
@@ -36,21 +36,20 @@ $result = mysqli_query($conn, $query);
         <title>Ticketový systém</title>
   </head>
   <body class="container-fluid">
-    <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
-        <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
-        <a class="navbar-brand mb-0 h1" href="password_change.php"><i class="fa-solid fa-gear"></i>Zmena hesla</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásenie sa</button></a>
-   </nav>
-   <div class="card shadow p-3 mb-5 bg-body rounded">
-            <div class="mt-5">
-                <h2 class="text-center">Moje učebne</h2>
-            </div>
+
+   <?php include('./components/Navbar_user.php'); ?>
+
+   <div class="mt-4">
+    <div class="p-1 m-5">
+      <div>
+        <h2 class="text-center mt-5">Moje učebne</h2>
         <?php include('./components/alertDanger.php'); ?>
         <?php include('./components/alertSuccess.php'); ?>
-        </div>
+      </div>
+    </div>
+
         <div class="table-responsive">
-        <form id="note" action='../backend/update.php' method='POST'></form>
+        <form id="note" action='./backend/update.php' method='POST'></form>
         <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
             <thead class="thead-dark">
                 <tr>

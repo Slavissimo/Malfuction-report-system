@@ -1,11 +1,9 @@
 <?php
-
-require '../config/config.php';
-require '../backend/loggedinstatus.php';
-require '../backend/loginconfirm.php';
-require '../backend/PHPMailer/src/PHPMailer.php';
-require '../backend/PHPMailer/src/SMTP.php';
-require '../backend/PHPMailer/src/Exception.php';
+session_start();
+require 'config/config.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -51,11 +49,11 @@ if(isset($_POST['send'])) {
     $mail->addAddress($patch['email']);
     if ($mail->Send()) {
         $_SESSION['messageSuccess'] = "Your report has been submited and email was sent";
-        header("Location: ../frontend/reports.php");
+        header("Location: ../reports.php");
         exit(0);
     } else {
         $_SESSION['messageDanger'] = "Your report has been submited however a mail was not sent";
-        header("Location: ../frontend/reports.php");
+        header("Location: ../reports.php");
         exit(0);
     }
 }
@@ -72,11 +70,11 @@ if(isset($_POST['add'])){
     $queue = mysqli_query($conn, $addadmin);
     if($queue){
         $_SESSION['messageSuccess'] = "Admin and classroom added!";
-        header("Location: ../frontend/admin_classrooms.php");
+        header("Location: ../admin_classrooms.php");
     }
     else{
         $_SESSION['messageDanger'] = "Admin and classroom not added!";
-        header("Location: ../frontend/admin_classrooms.php");
+        header("Location: ../admin_classrooms.php");
     }
 }
 if(isset($_POST['add_user'])){
@@ -90,11 +88,11 @@ if(isset($_POST['add_user'])){
     $query = mysqli_query($conn, $adduser);
     if($query){
         $_SESSION['messageSuccess'] = "Admin added!";
-        header("Location: ../frontend/admin_users.php");
+        header("Location: ../admin_users.php");
     }
     else{
         $_SESSION['messageDanger'] = "Admin not added!";
-        header("Location: ../frontend/admin_users.php");
+        header("Location: ../admin_users.php");
     }
 }
 ?>

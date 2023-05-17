@@ -1,10 +1,9 @@
 <?php
-require '../config/config.php';
-require '../backend/loggedinstatus.php';
-require '../backend/loginconfirm.php';
-require '../backend/PHPMailer/src/PHPMailer.php';
-require '../backend/PHPMailer/src/SMTP.php';
-require '../backend/PHPMailer/src/Exception.php';
+session_start();
+require 'config/config.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -61,14 +60,14 @@ if(isset($_POST['update'])){
             $_SESSION['messageDanger'] = "Report updated but email was not sent!". $mail->ErrorInfo;
         }
     }
-    header("Location: ../frontend/classrooms.php");
+    header("Location: ../classrooms.php");
 }
 if(isset($_POST['notesubmit'])){
     $note = $_POST['notes'];
     $classRoom = $_POST['classRoom'];
     $queue = "UPDATE classrooms SET note='$note' WHERE number='$classRoom'";
     $result = mysqli_query($conn, $queue);
-    header("Location: ../frontend/classrooms.php");
+    header("Location: ../classrooms.php");
 }
 if(isset($_POST['edit'])){
     $uid = $_POST['teacher'];
@@ -77,11 +76,11 @@ if(isset($_POST['edit'])){
     $send = mysqli_query($conn, $update);
     if($send){
         $_SESSION['messageSuccess'] = "Admin changed!";
-        header("Location: ../frontend/admin_classrooms.php");
+        header("Location: ../admin_classrooms.php");
     }
     else{
         $_SESSION['messageDanger'] = "Admin not changed!";
-        header("Location: ../frontend/admin_classrooms.php");
+        header("Location: ../admin_classrooms.php");
     }
 }
 if(isset($_POST['admin_update'])){
@@ -118,7 +117,7 @@ if(isset($_POST['admin_update'])){
             $_SESSION['messageDanger'] = "Report updated but email was not sent!". $mail->ErrorInfo;
         }
     }
-header("Location: ../frontend/admin_reports.php");
+header("Location: ../admin_reports.php");
 }
 if(isset($_POST['edit_user'])){
     $id = $_POST['id'];
@@ -128,11 +127,11 @@ if(isset($_POST['edit_user'])){
     $outcome = mysqli_query($conn, $change);
     if($outcome){
         $_SESSION['messageSuccess'] = "Password changed!";
-        header("Location: ../frontend/admin_users.php");
+        header("Location: ../admin_users.php");
     }
     else{
         $_SESSION['messageDanger'] = "Password not changed!";
-        header("Location: ../frontend/admin_users.php");
+        header("Location: ../admin_users.php");
     }
 }
 if(isset($_POST['change'])){
@@ -150,21 +149,21 @@ if(isset($_POST['change'])){
             $do = mysqli_query($conn, $zmena);
             if($do){
                 $_SESSION['messageSuccess'] = "Password changed!";
-                header("Location: ../frontend/password_change.php");
+                header("Location: ../password_change.php");
             }
             else{
                 $_SESSION['messageDanger'] = "Password not changed!";
-                header("Location: ../frontend/password_change.php");
+                header("Location: ../password_change.php");
             }
         }
         else{
             $_SESSION['messageDanger'] = "Password not changed! Passwords don't match!";
-            header("Location: ../frontend/password_change.php");
+            header("Location: ../password_change.php");
         }
     }
     else{
         $_SESSION['messageDanger'] = "Password not changed! Incorrect old password";
-            header("Location: ../frontend/password_change.php");
+            header("Location: ../password_change.php");
     }
 }
 if(isset($_POST['report_edit'])){
@@ -175,11 +174,11 @@ if(isset($_POST['report_edit'])){
     $push = mysqli_query($conn, $upquery);
     if($push){
         $_SESSION['messageSuccess'] = "Data successfully changed!";
-        header("Location: ../frontend/reports.php");
+        header("Location: ../reports.php");
     }
     else{
         $_SESSION['messageDanger'] = "Data not changed!";
-        header("Location: ../frontend/reports.php");
+        header("Location: ../reports.php");
     }
 }
 ?>

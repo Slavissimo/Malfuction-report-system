@@ -1,7 +1,7 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../backend/admincheck.php';
-require '../config/config.php';
+require './backend/middleware/isLogged.php';
+require './backend/middleware/isAdmin.php';
+require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
 $query = "SELECT users.id, users.fname, users.lname, users.email, users.username FROM users WHERE users.id >=2";
@@ -70,21 +70,19 @@ $teachers = mysqli_query($conn, $teachersQuery);
         </script>
   </head>
   <body class="container-fluid">
-    <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand mb-0 h1" href="admin_reports.php"><i class="fa-solid fa-list-ul"></i>Nahlásenia</a>
-        <a class="navbar-brand mb-0 h1" href="admin_classrooms.php"><i class="fa-solid fa-people-group"></i>Učebne</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
-   </nav>
-   <?php include('./components/alertDanger.php'); ?>
-   <?php include('./components/alertSuccess.php'); ?>
-   <div class="card shadow p-3 mb-5 bg-body rounded">
-            <div class="mt-5">
-                <h2 class="text-center">Používatelia</h2>
-            </div>
-        </div>
+   <?php include('./components/Navbar.php'); ?>
+
+    <div class="p-1 m-5">
+      <div class="mt-5">
+          <h2 class="text-center">Používatelia</h2>
+          <?php include('./components/alertDanger.php'); ?>
+          <?php include('./components/alertSuccess.php'); ?>
+      </div>
+      </div>
+
         <div class="table-responsive">
-        <form id="edit_user" action="../backend/update.php" method="POST"></form>
-        <form id="add_user" action='../backend/add.php' method='POST'></form>
+        <form id="edit_user" action="./backend/update.php" method="POST"></form>
+        <form id="add_user" action='./backend/add.php' method='POST'></form>
         <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
             <thead class="thead-dark">
                 <tr>
@@ -110,7 +108,7 @@ $teachers = mysqli_query($conn, $teachersQuery);
           <td id="<?= $data['id']; ?>email"><?= $data['email']?></td>
           <td id="<?= $data['id']; ?>username"><?= $data['username']?></td>
           <td><button class="btn btn-success" onclick="editUser(<?= $data['id']; ?>);">Upraviť</button></td>
-          <td><a href="../backend/deleteuser.php?id=<?= $data['id']; ?>"><button class="btn btn-danger" onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
+          <td><a href="./backend/deleteuser.php?id=<?= $data['id']; ?>"><button class="btn btn-danger" onClick='javascript:return confirm("Naozaj to chceš zmazať?");'>Zmazať</button></a></td>
         </tr>
   <?php
         $cislo = $cislo +1;

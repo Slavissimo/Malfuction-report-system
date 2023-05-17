@@ -1,6 +1,6 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../config/config.php';
+require './backend/middleware/isLogged.php';
+require './backend/config/config.php';
 
 
 $suid = $_SESSION['userid'];
@@ -24,18 +24,16 @@ $outcome = mysqli_query($conn, $queue);
 
 </head>
 <body>
-<nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
-        <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
-        <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
-        <a class="navbar-brand mb-0 h1" href="password_change.php"><i class="fa-solid fa-gear"></i>Zmena hesla</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
-</nav>
-<div class="card shadow p-3 mb-5 bg-body rounded">
-            <div class="mt-5">
-                <h2 class="text-center">Nevyriešené nahlásenia</h2>
-            </div>
-        </div>
+
+ <?php include('./components/Navbar_user.php'); ?>
+
+<div class="mt-4">
+    <div class="p-1 m-5">
+      <div>
+        <h2 class="text-center mt-5">Vyriešené nahlásenia</h2>
+      </div>
+    </div>
+
 <div class="table-responsive">
         <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
             <thead class="thead-dark">
@@ -57,7 +55,7 @@ $outcome = mysqli_query($conn, $queue);
                                 <td><?= $data['pcnumber']; ?></td>
                                 <td><?= $data['message']; ?></td>
                                 <td>
-                                    <form id="edit_report<?= $data['id']; ?>" method="POST" action="../backend/update.php"></form>
+                                    <form id="edit_report<?= $data['id']; ?>" method="POST" action="./backend/update.php"></form>
                                     <select form="edit_report<?= $data['id']; ?>" name="reportStatus" class="form-control" required>
                                     <option value="<?= $data['report_status']?>"><?php if($data['report_status'] == 1){ echo '';} else {echo 'Robím na tom';}?></option>
                                     <option value="2">Robím na tom</option>
@@ -109,7 +107,7 @@ $outcome = mysqli_query($conn, $queue);
                                 <td><?= $info['pcnumber']; ?></td>
                                 <td><?= $info['message']; ?></td>
                                 <td>
-                                    <form id="edit_report<?= $info['id']; ?>" method="POST" action="../backend/update.php"></form>
+                                    <form id="edit_report<?= $info['id']; ?>" method="POST" action="/backend/update.php"></form>
                                     <select form="edit_report<?= $info['id']; ?>" name="reportStatus" class="form-control" required>
                                     <option value="<?= $info['report_status']?>"><?php if($info['report_status'] == 3){ echo 'Vyriešené';} else {echo 'Nedá sa opraviť';}?></option>
                                     <option value="2">Robím na tom</option>

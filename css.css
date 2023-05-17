@@ -102,6 +102,11 @@
 .width{
   flex-grow: 8;
 }
+
+.nav-link {
+  display: flex;
+}
+
 @media only screen and (max-width: 480px) {
   #login {
     flex-direction: column;

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/config.php';
+require 'config/config.php';
     if(isset($_POST['login'])) {
 
         $username = $_POST['username'];
@@ -16,19 +16,19 @@ require '../config/config.php';
                 if (password_verify($password, $dbPass)) {
                     $_SESSION['userid'] = $uid;
                     if($uid == "1"){
-                      header("Location: ../frontend/admin_classrooms.php");
+                      header("Location: ../admin_classrooms.php");
                     }
                     else{
-                      header("Location: ../frontend/classrooms.php");
+                      header("Location: ../classrooms.php");
                     }
                 } else {
                     $_SESSION['messageDanger'] = "Wrong password";
-                    header("Location: ../frontend/index.php");
+                    header("Location: ../index.php");
                 }
 
         } else {
             $_SESSION['messageDanger'] = "Wrong Username";
-            header("Location: ../frontend/index.php");
+            header("Location: ../index.php");
         }
     }
     if(isset($_POST['email']) && isset($_POST['firstName']) && isset($_POST['lastName'])) {
@@ -41,7 +41,7 @@ require '../config/config.php';
         if(mysqli_num_rows($answer) > 1){
             $userData = mysqli_fetch_array($answer);
             $_SESSION['userid'] = $userData['id'];
-            header("Location: ../frontend/classrooms.php");
+            header("Location: ../classrooms.php");
         }
         else{
             $insert = "INSERT INTO users (fname, lname, email) VALUES ('$firstName', '$lastName', '$email')";
@@ -50,7 +50,7 @@ require '../config/config.php';
             $ans = mysqli_query($conn, $getid);
             $userData = mysqli_fetch_array($ans);
             $_SESSION['userid'] = $userData['id'];
-            header("Location: ../frontend/classrooms.php");
+            header("Location: ../classrooms.php");
         }
     
     }

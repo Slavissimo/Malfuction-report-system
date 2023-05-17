@@ -1,8 +1,7 @@
 <?php 
+session_start();
 
-require '../config/config.php';
-require '../backend/loggedinstatus.php';
-require '../backend/loginconfirm.php';
+require 'config/config.php';
 
 $id = $_GET['id'];
 
@@ -11,12 +10,12 @@ $result = mysqli_query($conn, $query);
 
 if($result){
     $_SESSION['messageSuccess'] = "Classroom has been deleted";
-    header("Location: ../frontend/admin_classrooms.php");
+    header("Location: ../admin_classrooms.php");
     exit(0);
 }
 else{
     $_SESSION['messageDanger'] = "Classroom has not been deleted";
-    header("Location: ../frontend/admin_classrooms.php");
+    header("Location: ../admin_classrooms.php");
     exit(0);
 }
 ?>

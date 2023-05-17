@@ -1,6 +1,6 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../config/config.php';
+require './backend/middleware/isLogged.php';
+require './backend/config/config.php';
 
 $query = "SELECT number FROM classrooms";
 $result = mysqli_query($conn, $query);
@@ -18,19 +18,19 @@ $result = mysqli_query($conn, $query);
         <title>Ticketový systém</title>
   </head>
   <body class="container-fluid">
-    <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
-        <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
-        <a class="navbar-brand mb-0 h1" href="password_change.php"><i class="fa-solid fa-gear"></i>Zmena hesla</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
-   </nav>
+
+  <?php include('./components/Navbar_user.php'); ?>
+
     <div class="mt-4">
-    <div class="card shadow p-3 mb-5">
-            <div>
-                <h2 class="text-center">Nové nahlásenie</h2>
-            </div>
+
+      <div class="p-1 m-5">
+        <div>
+          <h2 class="text-center mt-5">Nové nahlásenia</h2>
+
         </div>
-  <form method="POST" action="../backend/add.php">
+      </div>
+
+  <form method="POST" action="./backend/add.php">
   <div class="form-group">
   <label name="inputClassroom">Učebňa</label>
       <select name="inputClassroom" class="form-control" required>

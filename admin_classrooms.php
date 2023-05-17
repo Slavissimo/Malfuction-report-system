@@ -1,7 +1,7 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../backend/admincheck.php';
-require '../config/config.php';
+require './backend/middleware/isLogged.php';
+require './backend/middleware/isAdmin.php';
+require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
 $query = "SELECT classrooms.id,classrooms.number, users.fname, users.lname FROM classrooms LEFT JOIN classrooms_admins ON classrooms.id = classrooms_admins.classroom_id LEFT JOIN users ON users.id = classrooms_admins.user_id";
@@ -58,20 +58,18 @@ $teachers = mysqli_query($conn, $teachersQuery);
         </script>
   </head>
   <body class="container-fluid">
-    <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand mb-0 h1" href="admin_reports.php"><i class="fa-solid fa-list-ul"></i>Nahlásenia</a>
-        <a class="navbar-brand mb-0 h1" href="admin_users.php"><i class="fa-solid fa-person"></i>Používatelia</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
-   </nav>
-   <?php include('./components/alertDanger.php'); ?>
-   <?php include('./components/alertSuccess.php'); ?>
-   <div class="card shadow p-3 mb-5 bg-body rounded">
-            <div class="mt-5">
-                <h2 class="text-center">Učebne</h2>
-            </div>
-        </div>
+   <?php include('./components/Navbar.php'); ?>
+
+   <div class="p-1 m-5">
+      <div class="mt-5">
+          <h2 class="text-center">Učebne</h2>
+          <?php include('./components/alertDanger.php'); ?>
+          <?php include('./components/alertSuccess.php'); ?>
+      </div>
+    </div>
+
         <div class="table-responsive">
-        <form id="add_class" action='../backend/add.php' method='POST'></form>
+        <form id="add_class" action='./backend/add.php' method='POST'></form>
         <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
             <thead class="thead-dark">
                 <tr>
