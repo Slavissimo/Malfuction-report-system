@@ -1,7 +1,6 @@
 <?php
+session_start();
 require 'config/config.php';
-require 'loggedinstatus.php';
-require 'loginconfirm.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 require 'PHPMailer/src/Exception.php';

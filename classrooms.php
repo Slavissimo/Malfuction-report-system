@@ -1,5 +1,5 @@
 <?php
-require './backend/loggedinstatus.php';
+require './backend/middleware/isLogged.php';
 require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
@@ -37,15 +37,17 @@ $result = mysqli_query($conn, $query);
   </head>
   <body class="container-fluid">
 
-   <?php include('./components/Navbar.php'); ?>
+   <?php include('./components/Navbar_user.php'); ?>
 
-   <div class="card shadow p-3 mb-5 bg-body rounded">
-            <div class="mt-5">
-                <h2 class="text-center">Moje učebne</h2>
-            </div>
+   <div class="mt-4">
+    <div class="p-1 m-5">
+      <div>
+        <h2 class="text-center mt-5">Moje učebne</h2>
         <?php include('./components/alertDanger.php'); ?>
         <?php include('./components/alertSuccess.php'); ?>
-        </div>
+      </div>
+    </div>
+
         <div class="table-responsive">
         <form id="note" action='./backend/update.php' method='POST'></form>
         <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">

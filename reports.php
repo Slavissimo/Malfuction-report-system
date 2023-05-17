@@ -1,5 +1,5 @@
 <?php
-require './backend/loggedinstatus.php';
+require './backend/middleware/isLogged.php';
 require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
@@ -47,19 +47,21 @@ $cislo = 1;
 
 <body class="container-fluid">
 
-  <?php include('./components/Navbar.php'); ?>
+  <?php include('./components/Navbar_user.php'); ?> 
 
   <div class="mt-4">
 
-    <div class="card shadow p-3 mb-5 bg-body rounded">
+  <div class="mt-4">
+    <div class="p-1 m-5">
       <div>
-        <h2 class="text-center">Moje nahlásenia</h2>
+        <h2 class="text-center mt-5">Moje nahlásenia</h2>
+        <?php include('./components/alertDanger.php'); ?>
+        <?php include('./components/alertSuccess.php'); ?>
       </div>
     </div>
     <form method="POST" id="report_edit" action="./backend/update.php"></form>
     <div class="table-responsive">
-      <?php include('./components/alertDanger.php'); ?>
-      <?php include('./components/alertSuccess.php'); ?>
+
       <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
         <thead class="thead-dark">
           <tr>

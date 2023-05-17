@@ -1,6 +1,6 @@
 <?php
-require './backend/loggedinstatus.php';
-require './backend/admincheck.php';
+require './backend/middleware/isLogged.php';
+require './backend/middleware/isAdmin.php';
 require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
@@ -60,13 +60,14 @@ $teachers = mysqli_query($conn, $teachersQuery);
   <body class="container-fluid">
    <?php include('./components/Navbar.php'); ?>
 
-   <?php include('./components/alertDanger.php'); ?>
-   <?php include('./components/alertSuccess.php'); ?>
-   <div class="card shadow p-3 mb-5 bg-body rounded">
-            <div class="mt-5">
-                <h2 class="text-center">Učebne</h2>
-            </div>
-        </div>
+   <div class="p-1 m-5">
+      <div class="mt-5">
+          <h2 class="text-center">Učebne</h2>
+          <?php include('./components/alertDanger.php'); ?>
+          <?php include('./components/alertSuccess.php'); ?>
+      </div>
+    </div>
+
         <div class="table-responsive">
         <form id="add_class" action='./backend/add.php' method='POST'></form>
         <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">

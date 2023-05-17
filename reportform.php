@@ -1,5 +1,5 @@
 <?php
-require './backend/loggedinstatus.php';
+require './backend/middleware/isLogged.php';
 require './backend/config/config.php';
 
 $query = "SELECT number FROM classrooms";
@@ -19,14 +19,17 @@ $result = mysqli_query($conn, $query);
   </head>
   <body class="container-fluid">
 
-   <?php include('./components/Navbar.php'); ?>
+  <?php include('./components/Navbar_user.php'); ?>
 
     <div class="mt-4">
-    <div class="card shadow p-3 mb-5">
-            <div>
-                <h2 class="text-center">Nové nahlásenie</h2>
-            </div>
+
+      <div class="p-1 m-5">
+        <div>
+          <h2 class="text-center mt-5">Nové nahlásenia</h2>
+
         </div>
+      </div>
+
   <form method="POST" action="./backend/add.php">
   <div class="form-group">
   <label name="inputClassroom">Učebňa</label>

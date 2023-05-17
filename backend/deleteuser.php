@@ -1,8 +1,6 @@
 <?php 
-
+session_start();
 require 'config/config.php';
-require 'loggedinstatus.php';
-require 'loginconfirm.php';
 
 $id = $_GET['id'];
 

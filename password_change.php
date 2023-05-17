@@ -1,5 +1,5 @@
 <?php
-require './backend/loggedinstatus.php';
+require './backend/middleware/isLogged.php';
 require './backend/config/config.php';
 
 ?>
@@ -46,33 +46,45 @@ require './backend/config/config.php';
   </head>
   <body class="container-fluid">
 
-   <?php include('./components/Navbar.php'); ?>
+  <?php include('./components/Navbar_user.php'); ?>
 
-    <div class="mt-4">
-    <div class="card shadow p-3 mb-5">
-            <div>
-                <h2 class="text-center">Zmena hesla</h2>
-            </div>
-        </div>
-    <?php include('./components/alertDanger.php'); ?>
-    <?php include('./components/alertSuccess.php'); ?>
-  <form method="POST" action="../backend/update.php">
-    <div class="col-xs-3">
-    <label for="old_pass">Staré heslo</label>
+  <div class="p-1 m-5">
+      <div class="mt-5">
+          <h2 class="text-center">Zmena Hesla</h2>
+          <?php include('./components/alertDanger.php'); ?>
+          <?php include('./components/alertSuccess.php'); ?>
+      </div>
+    </div>
+
+  <form method="POST" action="./backend/update.php">
+  <div class="d-flex flex-column gap-2" style="margin: 5rem;">
+  <label for="old_pass" class="form-label">Staré heslo</label>
+  <div class="input-group">
     <input id="old_pass" type="password" class="form-control" name="old_password">
-    <span onclick="show_old_pass()"><input class="btn-check" type="checkbox"> Zobraziť heslo</span>
+    <button class="btn btn-outline-secondary" type="button" onclick="show_old_pass()">Zobraziť heslo</button>
+  </div>
 </div>
-  <div class="col-xs-3">
-    <label for="new_pass">Nové heslo</label>
+
+<div class="d-flex flex-column gap-2" style="margin: 5rem;">
+  <label for="new_pass" class="form-label">Nové heslo</label>
+  <div class="input-group">
     <input id="new_pass" type="password" class="form-control" name="new_password">
-    <span onclick="show_new_pass()"><input class="btn-check" type="checkbox"> Zobraziť heslo</span>
+    <button class="btn btn-outline-secondary" type="button" onclick="show_new_pass()">Zobraziť heslo</button>
+  </div>
 </div>
-  <div class="col-xs-3">
-  <label for="new_pass_verify">Zoapkujte heslo</label>
-  <input id="new_pass_verify" type="password" class="form-control" name="new_password_verify">
-  <span onclick="show_new_pass_verify()"><input class="btn-check" type="checkbox"> Zobraziť heslo</span>
+
+<div class="d-flex flex-column gap-3 " style="margin: 5rem;">
+  <label for="new_pass_verify" class="form-label">Zopakujte heslo</label>
+  <div class="input-group">
+    <input id="new_pass_verify" type="password" class="form-control" name="new_password_verify">
+    <button class="btn btn-outline-secondary" type="button" onclick="show_new_pass_verify()">Zobraziť heslo</button>
+  </div>
 </div>
-  <button class="btn btn-block btn-primary mt-3" name="change">Potvrdiť</button>
+
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-block btn-primary mt-3" style="max-width: 300px" name="change">Potvrdiť</button>
+    </div>
+
 </form>
     </div>
   </body>

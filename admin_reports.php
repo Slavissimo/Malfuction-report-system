@@ -1,6 +1,6 @@
 <?php
-require './backend/loggedinstatus.php';
-require './backend/admincheck.php';
+require './backend/middleware/isLogged.php';
+require './backend/middleware/isAdmin.php';
 require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
@@ -27,15 +27,16 @@ $cislo = 1;
 
 <body class="container-fluid">
   <?php include('./components/Navbar.php'); ?>
-  <div class="mt-4">
 
-    <div class="card shadow p-3 mb-5 bg-body rounded">
-    <?php include('./components/alertDanger.php'); ?>
-    <?php include('./components/alertSuccess.php'); ?>
+  <div class="mt-4">
+    <div class="p-1 m-5">
       <div>
-        <h2 class="text-center">Nahlásenia</h2>
+        <h2 class="text-center mt-5">Nahlásenia</h2>
+        <?php include('./components/alertDanger.php'); ?>
+        <?php include('./components/alertSuccess.php'); ?>
       </div>
     </div>
+
     <div class="table-responsive">
       <table class="table table-dark table-striped table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
         <thead class="thead-dark">
