@@ -1,8 +1,8 @@
 <?php 
 
-require '../config/config.php';
-require '../backend/loggedinstatus.php';
-require '../backend/loginconfirm.php';
+require 'config/config.php';
+require 'loggedinstatus.php';
+require 'loginconfirm.php';
 
 $id = $_GET['id'];
 
@@ -11,12 +11,12 @@ $result = mysqli_query($conn, $query);
 
 if($result){
     $_SESSION['messageSuccess'] = "Report has been deleted";
-    header("Location: ../frontend/reports.php");
+    header("Location: ../reports.php");
     exit(0);
 }
 else{
     $_SESSION['messageDanger'] = "Report has not been deleted";
-    header("Location: ../frontend/reports.php");
+    header("Location: ../reports.php");
     exit(0);
 }
 ?>

@@ -1,6 +1,5 @@
 <?php
-session_start();
-require '../config/config.php';
+require './backend/config/config.php';
 
 ?>
 <!DOCTYPE html>
@@ -30,18 +29,18 @@ require '../config/config.php';
   </head>
   <body class="login_kontainer">
       <div class="h1_welcoming">
-        <h1 class="text-center nadpis">Vitajte!</h1>
+        <h1 class="text-center nadpis mt-3">Vitajte!</h1>
       </div>
       <div id="login">
       <?php include('./components/alertDanger.php'); ?>
-        <h1 class="text-center text">Prihlásenie sa</h1>
+        <h1 class="text-center text mt-3">Prihlásenie sa</h1>
         <form method="POST" action="./backend/loginconfirm.php">
-          <div class="text">
+          <div style="margin: 1rem" class="text">
             <label>Prihlasovacie meno</label>
             <input class="form-control" type="text" name="username" required>
             <span></span>
         </div>
-        <div class="text">
+        <div style="margin: 1rem" class="text">
             <label>Heslo</label>
             <input id="password" class="form-control" type="password" name="password" required>
             <span onclick="show()"><input class="btn-check" type="checkbox"> Zobraziť heslo</span>

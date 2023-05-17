@@ -1,11 +1,11 @@
 <?php
 session_start();
-require '../config/config.php';
+require 'config/config.php';
 
 
 unset($_SESSION['userid']);
 
-header("Location: ../frontend/index.php");
+header("Location: ../index.php");
 
 
 

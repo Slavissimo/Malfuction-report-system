@@ -1,9 +1,9 @@
 <?php
-require '../config/config.php';
-require '../backend/loginconfirm.php';
+require 'config/config.php';
+require 'loginconfirm.php';
 
 if(!isset($_SESSION['userid'])){
-    header("Location: ../frontend/index.php");
+    header("Location: ../index.php");
 }
 
 

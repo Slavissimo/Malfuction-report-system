@@ -1,7 +1,7 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../backend/admincheck.php';
-require '../config/config.php';
+require './backend/loggedinstatus.php';
+require './backend/admincheck.php';
+require './backend/config/config.php';
 
 $uid = $_SESSION['userid'];
 $query = "SELECT users.id, users.fname, users.lname, users.email, users.username FROM users WHERE users.id >=2";
@@ -70,11 +70,8 @@ $teachers = mysqli_query($conn, $teachersQuery);
         </script>
   </head>
   <body class="container-fluid">
-    <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand mb-0 h1" href="admin_reports.php"><i class="fa-solid fa-list-ul"></i>Nahlásenia</a>
-        <a class="navbar-brand mb-0 h1" href="admin_classrooms.php"><i class="fa-solid fa-people-group"></i>Učebne</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
-   </nav>
+   <?php include('./components/Navbar.php'); ?>
+   
    <?php include('./components/alertDanger.php'); ?>
    <?php include('./components/alertSuccess.php'); ?>
    <div class="card shadow p-3 mb-5 bg-body rounded">

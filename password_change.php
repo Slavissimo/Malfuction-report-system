@@ -1,6 +1,6 @@
 <?php
-require '../backend/loggedinstatus.php';
-require '../config/config.php';
+require './backend/loggedinstatus.php';
+require './backend/config/config.php';
 
 ?>
 <!DOCTYPE html>
@@ -45,12 +45,9 @@ require '../config/config.php';
         <title>Ticketový systém</title>
   </head>
   <body class="container-fluid">
-    <nav class="nav fixed-top navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand mb-0 h1" href="reports.php"><i class="fa-solid fa-list-ul"></i>Moje nahlásenia</a>
-        <a class="navbar-brand mb-0 h1" href="classrooms.php"><i class="fa-solid fa-people-group"></i>Moje učebne</a>
-        <a class="navbar-brand mb-0 h1" href="reportform.php"><i class="fa-solid fa-pen"></i>Nové nahlásenie</a>
-        <a class="odhlasenie"href="../backend/logout.php"><button class="btn btn-dark" name="logout"><i class="fa-solid fa-power-off"></i>Odhlásiť sa</button></a>
-   </nav>
+
+   <?php include('./components/Navbar.php'); ?>
+
     <div class="mt-4">
     <div class="card shadow p-3 mb-5">
             <div>
